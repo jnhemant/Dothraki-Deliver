@@ -136,7 +136,7 @@ export const signOut = () => (dispatch) => {
         .catch(err => console.log(err.message));
 }
 
-export const postRequestForm = (destination, latitude, longitude, phone)  => {
+export const postRequestForm = (destination, latitude, longitude, phone)  => (dispatch) =>  {
     const token = localStorage.getItem('token');
     if(!token){
         alert('User not logged in. Please log in to continue');
@@ -144,9 +144,9 @@ export const postRequestForm = (destination, latitude, longitude, phone)  => {
     }
     const newRequest = {
         destination: destination,
-        phone: phone,
-        latitude: latitude,
-        longitude: longitude
+        destination_phone: phone,
+        destination_lat: latitude,
+        destination_long: longitude
     }
     console.log(JSON.stringify(newRequest));
     return fetch(baseUrl + 'users/users/request', {

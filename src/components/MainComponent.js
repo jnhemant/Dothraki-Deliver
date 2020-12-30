@@ -32,7 +32,7 @@ class Main extends Component{
         var request;
         if (this.props.isLoggedIn.isLoggedIn) {
             console.log(this.props.isLoggedIn.isLoggedIn + "in main component");
-            request = <RequestForm postRequestForm={this.props.postRequestForm} resetRequestFrom={this.props.resetRequestFrom} />
+            request = <RequestForm postRequestForm={this.props.postRequestForm} resetRequestForm={this.props.resetRequestForm} />
 
         }
         else {

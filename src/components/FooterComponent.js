@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Col, Row } from 'reactstrap';
 function Footer(props){
     return(
         <div className="footer">
         <div className="container">
-            <div className="row justify-content-center">             
+            <div className="row justify-content-left">             
                 {/* <div className="col-4 offset-1 col-sm-2">
                     <address>
                     <h5>Links</h5>
@@ -16,19 +17,22 @@ function Footer(props){
                     </ul></address>
                 </div> */}
                 <div className="col-7 col-sm-5">
-                    
                     <address>
                     <h5>Our Address</h5>
+                    <Row>
+                    <Col>
 		              Dothraki Street, Westeros<br />
 		              Khal Kingdom<br />
 		              Drogo State<br />
+                      </Col>
+                      <Col>
 		              <i className="fa fa-phone fa-lg"></i>: +910000000000<br />
 		              <i className="fa fa-fax fa-lg"></i>: +911111111111<br />
 		              <i className="fa fa-envelope fa-lg"></i>: <a href="mail to:dothraki@delivery.net">
-                         dothraki@delivery.net</a>
+                         dothraki@delivery.net</a></Col></Row>
                     </address>
                 </div>
-                <div className="col-12 col-sm-4 align-self-center">
+                {/* <div className="col-12 col-sm-4 align-self-center">
                     <address>
                     <div className="text-center">
                         <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a>
@@ -38,7 +42,7 @@ function Footer(props){
                         <a className="btn btn-social-icon btn-google" href="http://youtube.com/"><i className="fa fa-youtube"></i></a>
                         <a className="btn btn-social-icon" href="mailto:"><i className="fa fa-envelope-o"></i></a>
                     </div></address>
-                </div>
+                </div> */}
             </div>
             <div className="row justify-content-center">
                 <address>             

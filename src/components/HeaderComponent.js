@@ -7,7 +7,7 @@ const validEmail = (val) => !required(val) || /^[A-Z0-9._%+-]+@[A-z0-9.-]+\.[A-Z
 const required = (val) => val && val.length;
 const validPhone = (val) => !required(val) || ((val) && (val.length === 10));
 const validPassword = (val) => !required(val) || (val && val.length > 7);
-
+const isNumber = (val) => !isNaN(Number(val));
 
 
 class Header extends Component {
@@ -210,14 +210,15 @@ class Header extends Component {
                                 <Label htmlFor="phone" md={4}>Phone</Label>
                                 <Col md={8}>
                                     <Control.text model=".phone" type="tel" id="phone" name="phone" placeholder="Phone Number"
-                                        className="form-control" validators={{ required, validPhone }} />
+                                        className="form-control" validators={{ required, validPhone, isNumber }} />
                                     <Errors
                                         className="text-danger"
                                         model=".phone"
                                         show="touched"
                                         messages={{
                                             required: 'Required ',
-                                            validPhone: 'Must be a valid phone'
+                                            validPhone: 'Must be a valid phone',
+                                            isNumber: 'Must be a number'
                                         }}
                                     /></Col>
                             </Row>
