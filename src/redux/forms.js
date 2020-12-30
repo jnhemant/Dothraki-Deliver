@@ -11,3 +11,10 @@ export const InitialSignup = {
     location: '',
     role: ''
 }
+
+export const InitialRequestForm = {
+    destination: '',
+    latitude: '',
+    longitude: '',
+    phone: ''
+}

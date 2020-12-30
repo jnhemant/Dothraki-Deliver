@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import { createForms } from 'react-redux-form';
-import { InitialLogin, InitialSignup } from './forms';
+import { InitialLogin, InitialRequestForm, InitialSignup } from './forms';
 // import { Reducer, initialState } from './reducer'
 import { UserLogin } from './userLogin';
 import logger from 'redux-logger';
@@ -12,7 +12,8 @@ export const ConfigureStore = () => {
             isLoggedIn : UserLogin,
             ...createForms({
                 login: InitialLogin,
-                signup: InitialSignup
+                signup: InitialSignup,
+                request: InitialRequestForm
             })
         }),
         applyMiddleware(thunk, logger)

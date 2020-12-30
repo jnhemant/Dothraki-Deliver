@@ -68,6 +68,7 @@ class Header extends Component {
     render() {
         var button;
         if(!this.props.isLoggedIn.isLoggedIn){
+            console.log(this.props.isLoggedIn.isLoggedIn);
             button = <div>
             <Button outline onClick={this.toggleModal}>
             <span className="fa fa-sign-in fa-lg"></span>{' '}Login
@@ -79,6 +80,7 @@ class Header extends Component {
     
         }
         else{
+            console.log(this.props.isLoggedIn.isLoggedIn);
             button = <Button outline onClick={this.props.signOut}>
             <span className="fa fa-sign-out fa-lg"></span>{' '}Sign Out
         </Button>;

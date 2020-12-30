@@ -135,3 +135,49 @@ export const signOut = () => (dispatch) => {
         })
         .catch(err => console.log(err.message));
 }
+
+export const postRequestForm = (destination, latitude, longitude, phone)  => {
+    const token = localStorage.getItem('token');
+    if(!token){
+        alert('User not logged in. Please log in to continue');
+        return;
+    }
+    const newRequest = {
+        destination: destination,
+        phone: phone,
+        latitude: latitude,
+        longitude: longitude
+    }
+    console.log(JSON.stringify(newRequest));
+    return fetch(baseUrl + 'users/users/request', {
+        method: 'POST',
+        body: JSON.stringify(newRequest),
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`
+        },
+        // credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ": " + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errMess = new Error(error.message);
+                throw errMess;
+            })
+        .then(response => response.json())
+        .then(response => {
+            alert(JSON.stringify(response.request));
+        })
+        .catch(err => {
+            console.log('Request could not be created ', err.message);
+            alert('Request creation unsuccessful!\nError: ' + err.message)
+        });
+}

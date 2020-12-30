@@ -5,7 +5,7 @@ function Footer(props){
         <div className="footer">
         <div className="container">
             <div className="row justify-content-center">             
-                <div className="col-4 offset-1 col-sm-2">
+                {/* <div className="col-4 offset-1 col-sm-2">
                     <address>
                     <h5>Links</h5>
                     <ul className="list-unstyled">
@@ -14,7 +14,7 @@ function Footer(props){
                         <li><Link to="/menu">Menu</Link></li>
                         <li><Link to="contactus">Contact Us</Link></li>
                     </ul></address>
-                </div>
+                </div> */}
                 <div className="col-7 col-sm-5">
                     
                     <address>
