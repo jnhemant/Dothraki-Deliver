@@ -9,6 +9,7 @@ const validPhone = (val) => !required(val) || ((val) && (val.length === 10));
 const validPassword = (val) => !required(val) || (val && val.length > 7);
 
 
+
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -88,9 +89,9 @@ class Header extends Component {
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        {/* <NavbarBrand className="mr-auto" href="/">
-                            <img src="assets/images/logo.png" height="30" width="41" alt="Ristorante Con Fusion" />
-                        </NavbarBrand> */}
+                        <NavbarBrand className="mr-auto" href="/">
+                            <img src="assets/logo.png" height="45rem" width="110rem" alt="Dothraki Delivery" />
+                        </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 
