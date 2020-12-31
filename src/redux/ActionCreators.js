@@ -103,13 +103,13 @@ export const postSignUp = (email, phone, password, location, role) => (dispatch)
 
 
 export const signOut = () => (dispatch) => {
-    dispatch(loginFalse());
     const token = localStorage.getItem('token');
     if(!token){
         alert('User not logged in. Please log in to continue');
         return;
     }
     localStorage.removeItem('token');
+    dispatch(loginFalse());
     return fetch(baseUrl + 'auth/users/signout', {
         headers: {
             'authorization': `Bearer ${token}`,
@@ -181,3 +181,43 @@ export const postRequestForm = (destination, latitude, longitude, phone)  => (di
             alert('Request creation unsuccessful!\nError: ' + err.message)
         });
 }
+
+export const fetchRequests = () => (dispatch) => {
+    const token = localStorage.getItem('token');
+    if(!token){
+        alert('User not logged in. Please log in to continue');
+        return;
+    }
+    return fetch(baseUrl + 'users/requests/pending', {
+        headers: {
+            'authorization': `Bearer ${token}`,
+        },
+    })
+    .then(response => {
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error ' + response.status + ": " + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    }, 
+    error => {
+        var errMess = new Error(error.message);
+        throw errMess;
+    })
+    .then(response => response.json())
+    .then(requests => dispatch(addRequests(requests.requests)))
+    .catch(err => dispatch(requestsFailed(err.message)));
+};
+
+export const requestsFailed = (errmess) => ({
+    type: ActionTypes.REQUESTS_FAILED,
+    payload: errmess
+});
+
+export const addRequests = (requests) => ({
+    type: ActionTypes.ADD_REQUESTS,
+    payload: requests
+});

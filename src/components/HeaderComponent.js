@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
 
 const validEmail = (val) => !required(val) || /^[A-Z0-9._%+-]+@[A-z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
@@ -81,9 +81,16 @@ class Header extends Component {
         }
         else{
             console.log(this.props.isLoggedIn.isLoggedIn);
-            button = <Button outline onClick={this.props.signOut}>
-            <span className="fa fa-sign-out fa-lg"></span>{' '}Sign Out
-        </Button>;
+            button = <div>
+                <Link to="/pendingrequests">
+                    <Button outline>
+                        Pending Requests
+                    </Button>
+                </Link>{'  '}
+                <Button outline onClick={this.props.signOut}>
+                    <span className="fa fa-sign-out fa-lg"></span>{' '}Sign Out
+                </Button>
+            </div>;
             
         }
         return (

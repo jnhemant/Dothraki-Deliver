@@ -12,7 +12,7 @@
 
 .footer{
   background-color:  #242b2c;
-  margin:0px auto;
+  margin:0px 0px 0px 0px;
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
@@ -45,4 +45,8 @@ address{
 
 .requestFormButton{
   background-color: #242b2c;
+}
+
+.requests-wrapper{
+  padding: 20px auto;
 }
