@@ -12,7 +12,7 @@
 
 .footer{
   background-color:  #242b2c;
-  margin:0px 0px 0px 0px;
+  margin:-20px 0px 0px 0px;
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
@@ -36,11 +36,10 @@ address{
 
 .navbar-dark {
   background-color: #242b2c;
-  color: #feffff;
 }
 
-.requestForm{
-  background-color: rgb(206, 207, 207);
+.request_form{
+  padding: 10px 10px 0 10px;
 }
 
 .requestFormButton{
@@ -50,3 +49,43 @@ address{
 .requests-wrapper{
   padding: 20px auto;
 }
+
+.pending_request{
+  padding: 20px 10px 20px 10px;
+}
+
+
+/* .nav-link{
+  border: none;
+  color:rgb(3, 233, 233);
+  background-color: inherit;
+}
+
+.nav-link:hover{
+  outline: none;
+  color: rgb(0, 217, 255);
+  text-decoration: none;
+  background-color: inherit;
+}
+
+.nav-link:active{
+  outline: none;
+  border: none;
+  color:rgb(3, 233, 233);
+  background-color: inherit;
+}
+
+.nav-link:focus{
+  outline: none;
+  border: none;
+  color:rgb(3, 233, 233);
+  background-color: inherit;
+}
+
+.nav-link:visited{
+  outline: none;
+  border: none;
+  color:rgb(3, 233, 233);
+  background-color: inherit;
+}
+ */

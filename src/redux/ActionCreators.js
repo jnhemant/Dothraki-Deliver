@@ -185,7 +185,7 @@ export const postRequestForm = (destination, latitude, longitude, phone)  => (di
 export const fetchRequests = () => (dispatch) => {
     const token = localStorage.getItem('token');
     if(!token){
-        alert('User not logged in. Please log in to continue');
+        // alert('User not logged in. Please log in to continue');
         return;
     }
     return fetch(baseUrl + 'users/requests/pending', {

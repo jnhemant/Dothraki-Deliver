@@ -69,28 +69,32 @@ class Header extends Component {
         var button;
         if(!this.props.isLoggedIn.isLoggedIn){
             console.log(this.props.isLoggedIn.isLoggedIn);
-            button = <div>
-            <Button outline onClick={this.toggleModal}>
+            button = <Nav className="ml-auto" navbar>
+                <NavItem>
+            <NavLink className="nav-link" to="/home" onClick={this.toggleModal} style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}} 
+            activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>
             <span className="fa fa-sign-in fa-lg"></span>{' '}Login
-        </Button>
-        {'  '}
-        <Button outline onClick={this.toggleModalSignUpOpen}>
+        </NavLink></NavItem>
+        <NavItem>
+        <NavLink className="nav-link"  to="/home" onClick={this.toggleModalSignUpOpen} style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}} 
+        activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>
             <span className="fa fa-user-plus fa-lg"></span>{' '}Sign Up
-        </Button></div>;
+        </NavLink></NavItem></Nav>;
     
         }
         else{
             console.log(this.props.isLoggedIn.isLoggedIn);
-            button = <div>
-                <Link to="/pendingrequests">
-                    <Button outline>
+            button = <Nav className="ml-auto" navbar>
+                <NavItem>
+                    <NavLink to="/pendingrequests" className="nav-link" style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}
+                     activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>
                         Pending Requests
-                    </Button>
-                </Link>{'  '}
-                <Button outline onClick={this.props.signOut}>
-                    <span className="fa fa-sign-out fa-lg"></span>{' '}Sign Out
-                </Button>
-            </div>;
+                    </NavLink></NavItem>
+                    <NavItem><NavLink  to="/home" className="nav-link" onClick={this.props.signOut} style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}} 
+                    activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>                        
+                        Sign Out{' '}<span className="fa fa-sign-out fa-lg"></span>
+                    </NavLink></NavItem>
+            </Nav>;
             
         }
         return (
@@ -102,14 +106,9 @@ class Header extends Component {
                             <img src="assets/logo.png" height="45rem" width="110rem" alt="Dothraki Delivery" />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav navbar>
-                                
-                            </Nav>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    {button}                                                                        
-                                </NavItem>
-                            </Nav>
+                                                            
+                                    {button}
+                            
                         </Collapse>
                     </div>
                 </Navbar>

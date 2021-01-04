@@ -17,7 +17,7 @@ const RequestForm = (props) => {
 
     return(
         <div className="container row row-content">
-            <div className="col-12 col-md-9">
+            <div className="col-12 col-md-7 offset-md-2 request_form">
                         <Form model="request" onSubmit={(values) => handleSubmit(values)}>
                             <Row className="form-group">
                                 <Label htmlFor="destination" md={4}>Destination Address</Label>

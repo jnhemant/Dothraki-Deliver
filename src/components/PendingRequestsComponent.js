@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Table, Row, Col, Button} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const PendingRequests = (props) => {
     if (props.errMess) {
@@ -31,14 +32,28 @@ const PendingRequests = (props) => {
                 <td>{request.destination_address}</td>
                 <td>{request.destination_phone}</td>
                 <td>{request.distance_close===0?'No':'Yes'}</td>
-                <td>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(request.date_time)))}</td>
+                <td>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Asia/Kolkata' }).format(new Date(Date.parse(request.date_time)))}</td>
                 <td>{status}</td>
             </tr>
         );
       });
     return(
-        <div className='container'>
-        <h4>Pending Requests</h4>
+        <div className='container pending_request'>
+            <Row style={{padding: "10px 0px 10px 0px"}}>
+            <Col md={6} sm={3} xs={3}>
+                    <Link to=".home" target="_blank">
+                        <Button>
+                            <span className="fa fa-external-link-square fa=lg"></span>
+                            {' '}Create new request
+                        </Button>
+                    </Link>
+                </Col>
+            </Row>
+            <Row style={{padding: "20px 0px 5px 0px"}}>                
+                <Col md={6} sm={3} xs={3}>
+                    <h4>Pending Requests</h4>
+                </Col>
+            </Row>
         <Table responsive borderless hover striped className='text-center' size='md'>
             <thead>
                 <tr>
