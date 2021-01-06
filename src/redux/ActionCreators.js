@@ -165,6 +165,10 @@ export const postRequestForm = (destination, latitude, longitude, phone)  => (di
             }
             else {
                 var error = new Error('Error ' + response.status + ": " + response.statusText);
+                if(response.status >= 400 && response.status < 500){
+                    localStorage.removeItem('token');
+                    dispatch(loginFalse());
+                }
                 error.response = response;
                 throw error;
             }
@@ -189,6 +193,7 @@ export const fetchRequests = () => (dispatch) => {
         // alert('User not logged in. Please log in to continue');
         return;
     }
+    dispatch(requestsLoading());
     return fetch(baseUrl + 'users/requests/pending', {
         headers: {
             'authorization': `Bearer ${token}`,
@@ -200,6 +205,10 @@ export const fetchRequests = () => (dispatch) => {
         }
         else{
             var error = new Error('Error ' + response.status + ": " + response.statusText);
+            if(response.status >= 400 && response.status < 500){
+                localStorage.removeItem('token');
+                dispatch(loginFalse());
+            }
             error.response = response;
             throw error;
         }
@@ -216,6 +225,10 @@ export const fetchRequests = () => (dispatch) => {
 export const requestsFailed = (errmess) => ({
     type: ActionTypes.REQUESTS_FAILED,
     payload: errmess
+});
+
+export const requestsLoading = () => ({
+    type: ActionTypes.REQUESTS_LOADING
 });
 
 export const addRequests = (requests) => ({

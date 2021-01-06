@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Row, Col, Button} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 const PendingRequests = (props) => {
     if(!props.isLoggedIn.isLoggedIn){
@@ -8,7 +9,7 @@ const PendingRequests = (props) => {
         console.log(props.targetRoute);
         return <Redirect to="/login"/>
     }
-    if (props.errMess) {
+    else if (props.errMess) {
         return (
             <div className="container">
                 <div className="row">
@@ -17,7 +18,17 @@ const PendingRequests = (props) => {
             </div>
         )
     }
-    if(props.requests === null){
+    else if(props.isLoading){        
+        return(
+            <div className="container">
+                <div className="row">
+                    <h4>Loading...</h4>
+                <Loading />
+                </div>
+            </div>
+            );        
+    }
+    else if(props.requests == null){
         return (
             <div className="container">
                 <div className="row">
@@ -27,11 +38,12 @@ const PendingRequests = (props) => {
         )
     }
 
+    else{
     var serialNumber = 1;
     const requestsArray = props.requests.map(request => {
         var status = request.agent_id === null ? 'Waiting for agents': 'Request claimed by agent';
         return (
-            <tr>
+            <tr key={serialNumber}>
                 <th scope="row">{serialNumber++}</th>
                 <td>{request.consumer_address}</td>
                 <td>{request.destination_address}</td>
@@ -77,6 +89,7 @@ const PendingRequests = (props) => {
         </Table>
         </div>
     )
+    }
 } 
 
 export default PendingRequests;

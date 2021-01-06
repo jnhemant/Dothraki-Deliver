@@ -6,6 +6,7 @@ export const ADD_REQUESTS = 'ADD_REQUESTS';
 export const REQUESTS_FAILED = 'REQUESTS_FAILED';
 export const ADD_ROUTE = 'ADD_ROUTE';
 export const RESET_ROUTE = 'RESET_ROUTE';
+export const REQUESTS_LOADING = 'REQUESTS_LOADING'
 // export const ADD_DISHES = 'ADD_DISHES';
 // export const PROMOS_LOADING = 'PROMOS_LOADING';
 // export const ADD_PROMOS = 'ADD_PROMOS';
