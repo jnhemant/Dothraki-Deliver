@@ -1,6 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseurl';
 import fetch from 'cross-fetch';
+import { Redirect } from 'react-router-dom';
 
 export const loginTrue = () => ({
     type: ActionTypes.USER_LOGIN
@@ -10,7 +11,7 @@ export const loginFalse = () => ({
     type: ActionTypes.USER_LOGOUT
 });
 
-export const postLogin = (email, password) => (dispatch) => {
+export const postLogin = (email, password, targetRoute) => (dispatch) => {
     const userCredentials = {
         email: email,
         password: password
@@ -220,4 +221,13 @@ export const requestsFailed = (errmess) => ({
 export const addRequests = (requests) => ({
     type: ActionTypes.ADD_REQUESTS,
     payload: requests
+});
+
+export const addRoute = (route) => ({
+    type: ActionTypes.ADD_ROUTE,
+    payload: route
+});
+
+export const resetRoute = () => ({
+    type: ActionTypes.RESET_ROUTE
 });

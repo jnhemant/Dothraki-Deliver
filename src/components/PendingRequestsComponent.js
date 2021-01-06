@@ -1,8 +1,13 @@
 import React from 'react';
 import { Table, Row, Col, Button} from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const PendingRequests = (props) => {
+    if(!props.isLoggedIn.isLoggedIn){
+        props.addRoute("/pendingrequests");
+        console.log(props.targetRoute);
+        return <Redirect to="/login"/>
+    }
     if (props.errMess) {
         return (
             <div className="container">
@@ -12,7 +17,7 @@ const PendingRequests = (props) => {
             </div>
         )
     }
-    if(props.requests == null){
+    if(props.requests === null){
         return (
             <div className="container">
                 <div className="row">

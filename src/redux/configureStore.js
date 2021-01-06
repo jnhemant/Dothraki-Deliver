@@ -4,6 +4,7 @@ import { InitialLogin, InitialRequestForm, InitialSignup } from './forms';
 // import { Reducer, initialState } from './reducer'
 import { UserLogin } from './userLogin';
 import { Requests } from './requests';
+import { TargetRoute } from './targetRoute';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
@@ -12,6 +13,7 @@ export const ConfigureStore = () => {
         combineReducers({
             isLoggedIn : UserLogin,
             requests: Requests,
+            targetRoute: TargetRoute,
             ...createForms({
                 login: InitialLogin,
                 signup: InitialSignup,

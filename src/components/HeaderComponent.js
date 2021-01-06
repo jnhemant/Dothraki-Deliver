@@ -28,22 +28,22 @@ class Header extends Component {
         this.handleSignUp = this.handleSignUp.bind(this);
         this.handleRoleChange = this.handleRoleChange.bind(this);
     }
-    
+
     handleRoleChange = (event) => {
-        this.setState({role: event.target.value})
+        this.setState({ role: event.target.value })
     }
 
     handleLogin = async (values) => {
         this.toggleModal();
-        
+
         // event.preventDefault();
         await this.props.postLogin(values.email, values.password);
         // alert("email: " + values.email
         //     + " Password: " + values.password +
         //     " Remember: " + values.remember);
-        if(!values.remember){
+        if (!values.remember) {
             this.props.resetLoginForm();
-        }        
+        }
     }
 
     toggleNav = () => this.setState(
@@ -67,35 +67,39 @@ class Header extends Component {
         { isModalSignUpOpen: !this.state.isModalSignUpOpen });
     render() {
         var button;
-        if(!this.props.isLoggedIn.isLoggedIn){
+        if (!this.props.isLoggedIn.isLoggedIn) {
             console.log(this.props.isLoggedIn.isLoggedIn);
             button = <Nav className="ml-auto" navbar>
                 <NavItem>
-            <NavLink className="nav-link" to="/home" onClick={this.toggleModal} style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}} 
-            activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>
-            <span className="fa fa-sign-in fa-lg"></span>{' '}Login
-        </NavLink></NavItem>
-        <NavItem>
-        <NavLink className="nav-link"  to="/home" onClick={this.toggleModalSignUpOpen} style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}} 
-        activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>
-            <span className="fa fa-user-plus fa-lg"></span>{' '}Sign Up
-        </NavLink></NavItem></Nav>;
-    
-        }
-        else{
-            console.log(this.props.isLoggedIn.isLoggedIn);
-            button = <Nav className="ml-auto" navbar>
+                    <NavLink className="nav-link" to="/login"  style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                        activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
+                        <span className="fa fa-sign-in fa-lg"></span>{' '}Login
+                    </NavLink>
+                </NavItem>
                 <NavItem>
-                    <NavLink to="/pendingrequests" className="nav-link" style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}
-                     activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>
-                        Pending Requests
-                    </NavLink></NavItem>
-                    <NavItem><NavLink  to="/home" className="nav-link" onClick={this.props.signOut} style={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}} 
-                    activeStyle={{color: 'rgb(3, 233, 233)', textDecoration: 'none'}}>                        
-                        Sign Out{' '}<span className="fa fa-sign-out fa-lg"></span>
-                    </NavLink></NavItem>
+                    <NavLink className="nav-link" to="/home" onClick={this.toggleModalSignUpOpen} style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                        activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
+                        <span className="fa fa-user-plus fa-lg"></span>{' '}Sign Up
+                    </NavLink>
+                </NavItem>
             </Nav>;
-            
+
+        }
+        else {
+            console.log(this.props.isLoggedIn.isLoggedIn);
+            button = <Nav className="ml-auto" navbar>
+                <NavItem>
+                    <NavLink to="/pendingrequests" className="nav-link" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                        activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
+                        Pending Requests
+                    </NavLink>
+                    </NavItem>
+                <NavItem><NavLink to="/home" className="nav-link" onClick={this.props.signOut} style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                    activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
+                    Sign Out{' '}<span className="fa fa-sign-out fa-lg"></span>
+                </NavLink></NavItem>
+            </Nav>;
+
         }
         return (
             <>
@@ -106,9 +110,9 @@ class Header extends Component {
                             <img src="assets/logo.png" height="45rem" width="110rem" alt="Dothraki Delivery" />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                                                            
-                                    {button}
-                            
+
+                            {button}
+
                         </Collapse>
                     </div>
                 </Navbar>
@@ -117,8 +121,8 @@ class Header extends Component {
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
                                 <div className="jumbotext">
-                                <h1>Dothraki Delivery</h1>
-                                <p>Wanna send goods to your loved ones, but cannot go personally? We got you covered!</p>
+                                    <h1>Dothraki Delivery</h1>
+                                    <p>Wanna send goods to your loved ones, but cannot go personally? We got you covered!</p>
                                 </div>
                             </div>
                         </div>
