@@ -9,7 +9,7 @@ const PendingRequests = (props) => {
         console.log(props.targetRoute);
         return <Redirect to="/login"/>
     }
-    else if (props.errMess) {
+    if (props.errMess) {
         return (
             <div className="container">
                 <div className="row">
@@ -18,7 +18,7 @@ const PendingRequests = (props) => {
             </div>
         )
     }
-    else if(props.isLoading){        
+    if(props.isLoading){        
         return(
             <div className="container">
                 <div className="row">
@@ -28,7 +28,7 @@ const PendingRequests = (props) => {
             </div>
             );        
     }
-    else if(props.requests == null){
+    if(props.requests === null){
         return (
             <div className="container">
                 <div className="row">
@@ -37,8 +37,6 @@ const PendingRequests = (props) => {
             </div>
         )
     }
-
-    else{
     var serialNumber = 1;
     const requestsArray = props.requests.map(request => {
         var status = request.agent_id === null ? 'Waiting for agents': 'Request claimed by agent';
@@ -89,7 +87,6 @@ const PendingRequests = (props) => {
         </Table>
         </div>
     )
-    }
 } 
 
 export default PendingRequests;

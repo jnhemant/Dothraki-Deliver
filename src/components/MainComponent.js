@@ -37,7 +37,7 @@ class Main extends Component{
 
     componentDidMount() {
         this.props.fetchRequests();
-      }
+    }
 
     render(){
         const HomePage = () => {
@@ -71,6 +71,7 @@ class Main extends Component{
                 postLogin={this.props.postLogin}
                 targetRoute={this.props.targetRoute}
                 resetRoute={this.props.resetRoute}
+                fetchRequests={this.props.fetchRequests}
                 />
             )
         };   

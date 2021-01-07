@@ -7,6 +7,17 @@ const validEmail = (val) => !required(val) || /^[A-Z0-9._%+-]+@[A-z0-9.-]+\.[A-Z
 const required = (val) => val && val.length;
 
 
+const AuthAlert = (props) => {
+    if(props.currentRoute === "/home"){
+        return(<div></div>);
+    }
+    return(
+        <div>
+            <span style={{color:"red"}}><p>*You must log in first</p></span>
+        </div>
+    )
+}
+
 const Login = (props) => {
     const handleLogin = async (values) => {
         // this.toggleModal();
@@ -24,17 +35,21 @@ const Login = (props) => {
         var currentRoute = props.targetRoute.targetRoute;
         console.log("targetRoute is :" + currentRoute);
         props.resetRoute();
+        props.fetchRequests();
         return(<Redirect to={currentRoute} />)       
     }
+
+    
     return (
         <div className="container row row-content">
              <div className="col-12 col-md-7 offset-md-2 pending_request">
+             <AuthAlert currentRoute={props.targetRoute.targetRoute}/>
         <Form model="login" onSubmit={(values) => handleLogin(values)}>
             <Row className="form-group">
                 <Label htmlFor="email" md={2}>E-mail</Label>
                 <Col md={10}>
                     <Control.text model=".email" type="email" id="email" name="email" placeholder="Email Id" className="form-control"
-                        validators={{ required, validEmail }}
+                        validators={{ required, validEmail}}
                     ></Control.text>
                     <Errors
                         className="text-danger"
@@ -68,7 +83,7 @@ const Login = (props) => {
                         <Label check>
                             <Control.checkbox model=".remember" name="remember" className="form-check-input" />
                                     Remember me
-                                </Label>
+                        </Label>
                     </div>
                 </Col>
             </Row>
@@ -76,7 +91,7 @@ const Login = (props) => {
                 <Col md={{ size: 7, offset: 5 }}>
                     <Button type="submit" color="primary">
                         Login
-                                    </Button>
+                    </Button>
                 </Col>
             </Row>
         </Form>
