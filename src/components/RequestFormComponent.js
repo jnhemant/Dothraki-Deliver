@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, Redirect } from 'react-router-dom';
 import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
 
 const required = (val) => val && val.length;
@@ -9,9 +9,8 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 
 const RequestForm = (props) => {
-
     const handleSubmit = async (values) => {
-        await props.postRequestForm(values.destination, values.latitude, values.longitude, values.phone);
+        await props.postRequestForm(values.destination, values.latitude, values.longitude, values.phone, props.history);
         props.resetRequestForm();
     }
 

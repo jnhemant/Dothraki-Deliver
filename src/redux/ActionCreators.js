@@ -137,10 +137,11 @@ export const signOut = () => (dispatch) => {
         .catch(err => console.log(err.message));
 }
 
-export const postRequestForm = (destination, latitude, longitude, phone)  => (dispatch) =>  {
+export const postRequestForm = (destination, latitude, longitude, phone, history)  => (dispatch) =>  {
     const token = localStorage.getItem('token');
     if(!token){
         alert('User not logged in. Please log in to continue');
+        history.push("/login");
         return;
     }
     const newRequest = {
@@ -179,7 +180,8 @@ export const postRequestForm = (destination, latitude, longitude, phone)  => (di
             })
         .then(response => response.json())
         .then(response => {
-            alert(JSON.stringify(response.request));
+            alert(JSON.stringify(response.message));
+            history.push("/pendingrequests");
         })
         .catch(err => {
             console.log('Request could not be created ', err.message);

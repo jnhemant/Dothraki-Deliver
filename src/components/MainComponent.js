@@ -9,6 +9,21 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postSignUp, postLogin, signOut, postRequestForm, fetchRequests, addRoute, resetRoute } from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
+import { createBrowserHistory } from 'history';
+
+
+
+var history = createBrowserHistory();
+
+// Get the current location.
+var location = history.location;
+
+// Listen for changes to the current location.
+let unlisten = history.listen(({ location, action }) => {
+    console.log(action, location.pathname, location.state);
+  });
+
+//   history.push('/pendingrequests');
 
 const mapStateToProps = state => {
     return {
@@ -24,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
     resetLoginForm: () => { dispatch(actions.reset('login'))},
     resetSignUpForm: () => { dispatch(actions.reset('signup'))},
     signOut: () => dispatch(signOut()),
-    postRequestForm: (destination, latitude, longitude, phone) => dispatch(postRequestForm(destination, latitude, longitude, phone)),
+    postRequestForm: (destination, latitude, longitude, phone, history) => dispatch(postRequestForm(destination, latitude, longitude, phone, history)),
     resetRequestForm: () => { dispatch(actions.reset('request'))},
     fetchRequests: () => dispatch(fetchRequests()),
     addRoute: (route) => dispatch(addRoute(route)),
@@ -43,7 +58,11 @@ class Main extends Component{
     render(){
         const HomePage = () => {
             return(
-            <RequestForm postRequestForm={this.props.postRequestForm} resetRequestForm={this.props.resetRequestForm} />
+            <RequestForm isLoggedIn={this.props.isLoggedIn}
+            postRequestForm={this.props.postRequestForm} 
+            resetRequestForm={this.props.resetRequestForm}             
+            history={this.props.history}
+            />
             )
         }
         const Requests = () => {
@@ -105,5 +124,7 @@ class Main extends Component{
         </div>);
     }
 }
+
+// unlisten();
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
