@@ -1,7 +1,7 @@
 import React from 'react';
-import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
-import { NavLink, Link, Redirect } from 'react-router-dom';
-import { Control, LocalForm, Errors, Form } from 'react-redux-form';
+import {  Button, Label, Row, Col } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
+import { Control, Errors, Form } from 'react-redux-form';
 
 const validEmail = (val) => !required(val) || /^[A-Z0-9._%+-]+@[A-z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 const required = (val) => val && val.length;

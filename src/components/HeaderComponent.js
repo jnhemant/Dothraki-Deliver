@@ -13,58 +13,59 @@ const isNumber = (val) => !isNaN(Number(val));
 class Header extends Component {
     constructor(props) {
         super(props);
+    
         this.state = {
             isNavOpen: false,
-            isModalOpen: false,
-            isNavSignUp: false,
-            isModalSignUpOpen: false,
-            role: 'consumer'
+            // isModalOpen: false,
+            // isNavSignUp: false,
+            // isModalSignUpOpen: false,
+            // role: 'consumer'
         };
         this.toggleNav = this.toggleNav.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
-        this.handleLogin = this.handleLogin.bind(this);
-        this.toggleNavSignUp = this.toggleNavSignUp.bind(this);
-        this.toggleModalSignUpOpen = this.toggleModalSignUpOpen.bind(this);
-        this.handleSignUp = this.handleSignUp.bind(this);
-        this.handleRoleChange = this.handleRoleChange.bind(this);
+    //     this.toggleModal = this.toggleModal.bind(this);
+    //     this.handleLogin = this.handleLogin.bind(this);
+    //     this.toggleNavSignUp = this.toggleNavSignUp.bind(this);
+    //     this.toggleModalSignUpOpen = this.toggleModalSignUpOpen.bind(this);
+    //     this.handleSignUp = this.handleSignUp.bind(this);
+    //     this.handleRoleChange = this.handleRoleChange.bind(this);
     }
 
-    handleRoleChange = (event) => {
-        this.setState({ role: event.target.value })
-    }
+    // handleRoleChange = (event) => {
+    //     this.setState({ role: event.target.value })
+    // }
 
-    handleLogin = async (values) => {
-        this.toggleModal();
+    // handleLogin = async (values) => {
+    //     this.toggleModal();
 
-        // event.preventDefault();
-        await this.props.postLogin(values.email, values.password);
-        // alert("email: " + values.email
-        //     + " Password: " + values.password +
-        //     " Remember: " + values.remember);
-        if (!values.remember) {
-            this.props.resetLoginForm();
-        }
-    }
+    //     // event.preventDefault();
+    //     await this.props.postLogin(values.email, values.password);
+    //     // alert("email: " + values.email
+    //     //     + " Password: " + values.password +
+    //     //     " Remember: " + values.remember);
+    //     if (!values.remember) {
+    //         this.props.resetLoginForm();
+    //     }
+    // }
 
     toggleNav = () => this.setState(
         { isNavOpen: !this.state.isNavOpen });
 
-    toggleModal = () => this.setState(
-        { isModalOpen: !this.state.isModalOpen });
+    // toggleModal = () => this.setState(
+    //     { isModalOpen: !this.state.isModalOpen });
 
-    handleSignUp = async (values) => {
-        this.toggleModalSignUpOpen();
-        await this.props.postSignUp(values.email, values.phone, values.password, values.location, this.state.role);
-        // alert("Email: " + values.email
-        //     + " Phone: " + values.phone+ " Role: " + this.state.role);
-        this.props.resetSignUpForm();
-    }
+    // handleSignUp = async (values) => {
+    //     this.toggleModalSignUpOpen();
+    //     await this.props.postSignUp(values.email, values.phone, values.password, values.location, this.state.role);
+    //     // alert("Email: " + values.email
+    //     //     + " Phone: " + values.phone+ " Role: " + this.state.role);
+    //     this.props.resetSignUpForm();
+    // }
 
-    toggleNavSignUp = () => this.setState(
-        { isNavSignUp: !this.state.isNavSignUp });
+    // toggleNavSignUp = () => this.setState(
+    //     { isNavSignUp: !this.state.isNavSignUp });
 
-    toggleModalSignUpOpen = () => this.setState(
-        { isModalSignUpOpen: !this.state.isModalSignUpOpen });
+    // toggleModalSignUpOpen = () => this.setState(
+    //     { isModalSignUpOpen: !this.state.isModalSignUpOpen });
     render() {
         var button;
         if (!this.props.isLoggedIn.isLoggedIn) {
@@ -77,7 +78,7 @@ class Header extends Component {
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className="nav-link" to="/home" onClick={this.toggleModalSignUpOpen} style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                    <NavLink className="nav-link" to="/signup" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
                         activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
                         <span className="fa fa-user-plus fa-lg"></span>{' '}Sign Up
                     </NavLink>
@@ -128,7 +129,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </Jumbotron>
-                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                {/* <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                     <ModalBody>
                         <Form model="login" onSubmit={(values) => this.handleLogin(values)}>
@@ -277,7 +278,7 @@ class Header extends Component {
                             </Row>
                         </Form>
                     </ModalBody>
-                </Modal>
+                </Modal> */}
             </>
         )
     }

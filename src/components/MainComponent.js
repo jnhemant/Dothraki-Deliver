@@ -3,6 +3,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import RequestForm from './RequestFormComponent';
 import Login from './LoginComponent';
+import Signup from './SignupComponent';
 import PendingRequests from './PendingRequestsComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -74,7 +75,19 @@ class Main extends Component{
                 fetchRequests={this.props.fetchRequests}
                 />
             )
-        };   
+        };
+
+        const SignupPage = () => {
+            return(
+                <Signup
+                isLoggedIn={this.props.isLoggedIn}
+                resetSignUpForm={this.props.resetSignUpForm}
+                postSignUp={this.props.postSignUp}
+                targetRoute={this.props.targetRoute}
+                resetRoute={this.props.resetRoute}
+            />
+            );            
+        }
         return(
         <div>
                 <Header isLoggedIn={this.props.isLoggedIn} resetLoginForm={this.props.resetLoginForm} resetSignUpForm={this.props.resetSignUpForm}
@@ -83,6 +96,7 @@ class Main extends Component{
                     <Route path="/home" component={HomePage} />
                     <Route path="/pendingrequests" component={Requests} />
                     <Route path="/login" component={LoginPage}/>
+                    <Route path="/signup" component={SignupPage}/>
                     {/* <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback}/>}/>
           <Route exact path="/aboutus" component={() => <About leaders={this.props.leaders}/>}/> */}
                     <Redirect to="/home" />

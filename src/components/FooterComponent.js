@@ -28,7 +28,7 @@ function Footer(props){
                       <Col>
 		              <i className="fa fa-phone fa-lg"></i>: +910000000000<br />
 		              <i className="fa fa-fax fa-lg"></i>: +911111111111<br />
-		              <i className="fa fa-envelope fa-lg"></i>: <a href="mail to:dothraki@delivery.net">
+		              <i className="fa fa-envelope fa-lg"></i>: <a style={{ color: 'rgb(3, 233, 233)'}} href="mail to:dothraki@delivery.net">
                          dothraki@delivery.net</a></Col></Row>
                     </address>
                 </div>
