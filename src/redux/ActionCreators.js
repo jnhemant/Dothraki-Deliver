@@ -340,7 +340,7 @@ export const postRating = (requestId, rating, feedback, history)  => (dispatch) 
         .then(response => response.json())
         .then(response => {
             alert(JSON.stringify(response.message));
-            dispatch(fetchUnratedRequests());
+            return dispatch(fetchUnratedRequests());
         })
         .catch(err => {
             console.log('Rating could not be posted', err.message);

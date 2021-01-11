@@ -44,20 +44,29 @@ class Header extends Component {
     //     }
     // }
 
-    handleRating = (value) => {
+    handleRating = async (value) => {
         console.log("inside handleRating");
-        // this.setState({
-        //     isModalOpen: false
-        // })
-        this.toggleModal();
-        this.props.postRating(this.props.unratedRequests.requests[0].id, value, "Awesome", this.props.history);
+        if(this.props.unratedRequests.requests.length !== 0){
+            await this.props.postRating(this.props.unratedRequests.requests[0].id, value, "Awesome", this.props.history);
+        }        
+        this.toggleModal();      
+        this.props.history.push('/home');
+    }
+
+    handleDefaultRating = async () => {
+        console.log("inside handleRating");
+        if(this.props.unratedRequests.requests.length !== 0){
+            await this.props.postRating(this.props.unratedRequests.requests[0].id, 1, "Awesome", this.props.history);
+        }        
+        this.toggleModal();      
+        this.props.history.push('/home');
     }
 
     toggleNav = () => this.setState(
         { isNavOpen: !this.state.isNavOpen });
 
     toggleModal = () => this.setState(
-        { isModalOpen: !this.state.isModalOpen });
+        { isModalOpen: false });
 
     // handleSignUp = async (values) => {
     //     this.toggleModalSignUpOpen();
@@ -111,8 +120,8 @@ class Header extends Component {
                 </NavLink></NavItem>
             </Nav>;
 
+            
             if(this.props.unratedRequests.requests.length !== 0 && !this.state.isModalOpen){
-                // unratedRequests = <RatingStar onChange={this.ratingView}/>;
                 console.log("length of requests is greater than one");
                 this.setState({isModalOpen: true});
             }
@@ -145,8 +154,8 @@ class Header extends Component {
                     </div>
                 </Jumbotron>
                 {/* {unratedRequests} */}
-                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                 <Modal isOpen={this.state.isModalOpen} toggle={this.handleDefaultRating}>
+                    <ModalHeader toggle={this.handleDefaultRating}>How was your experience with us?</ModalHeader>
                     <ModalBody>
                     <ReactStars
                 count={5}

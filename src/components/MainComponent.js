@@ -81,6 +81,7 @@ class Main extends Component{
                 requests={this.props.requests.requests}
                 errMess={this.props.requests.errMess}
                 addRoute={this.props.addRoute}
+                fetchRequests={this.props.fetchRequests}
                 />
             );
             // if (this.props.isLoggedIn.isLoggedIn) {
@@ -128,6 +129,7 @@ class Main extends Component{
                 unratedRequests={this.props.unratedRequests}
                 postRating={this.props.postRating}
                 history={this.props.history}
+                fetchUnratedRequests={this.props.fetchUnratedRequests}
                 />
                 <Switch>
                     <Route path="/home" component={HomePage} />
