@@ -5,12 +5,13 @@ import RequestForm from './RequestFormComponent';
 import Login from './LoginComponent';
 import Signup from './SignupComponent';
 import PendingRequests from './PendingRequestsComponent';
+import RatingStar from './RatingStarComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postSignUp, postLogin, signOut, postRequestForm, fetchRequests, addRoute, resetRoute } from '../redux/ActionCreators';
+import { postSignUp, postLogin, signOut, postRequestForm, fetchRequests,
+     addRoute, resetRoute, fetchUnratedRequests, postRating } from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { createBrowserHistory } from 'history';
-
 
 
 var history = createBrowserHistory();
@@ -29,7 +30,8 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.isLoggedIn,
         requests: state.requests,
-        targetRoute: state.targetRoute
+        targetRoute: state.targetRoute,
+        unratedRequests: state.unratedRequests
     }
 }
 
@@ -43,7 +45,9 @@ const mapDispatchToProps = dispatch => ({
     resetRequestForm: () => { dispatch(actions.reset('request'))},
     fetchRequests: () => dispatch(fetchRequests()),
     addRoute: (route) => dispatch(addRoute(route)),
-    resetRoute: () => dispatch(resetRoute())
+    resetRoute: () => dispatch(resetRoute()),
+    fetchUnratedRequests: (history) => dispatch(fetchUnratedRequests(history)),
+    postRating: (requestId, rating, feedback, history) => dispatch(postRating(requestId, rating, feedback, history))
   });
 
 class Main extends Component{
@@ -53,7 +57,12 @@ class Main extends Component{
 
     componentDidMount() {
         this.props.fetchRequests();
+        this.props.fetchUnratedRequests(history);
     }
+
+    // componentDidUpdate() {
+    //     this.props.fetchUnratedRequests(history);
+    // }
 
     render(){
         const HomePage = () => {
@@ -109,8 +118,17 @@ class Main extends Component{
         }
         return(
         <div>
-                <Header isLoggedIn={this.props.isLoggedIn} resetLoginForm={this.props.resetLoginForm} resetSignUpForm={this.props.resetSignUpForm}
-                    postSignUp={this.props.postSignUp} postLogin={this.props.postLogin} signOut={this.props.signOut} />
+                <Header 
+                isLoggedIn={this.props.isLoggedIn}
+                resetLoginForm={this.props.resetLoginForm} 
+                resetSignUpForm={this.props.resetSignUpForm}
+                postSignUp={this.props.postSignUp} 
+                postLogin={this.props.postLogin} 
+                signOut={this.props.signOut} 
+                unratedRequests={this.props.unratedRequests}
+                postRating={this.props.postRating}
+                history={this.props.history}
+                />
                 <Switch>
                     <Route path="/home" component={HomePage} />
                     <Route path="/pendingrequests" component={Requests} />

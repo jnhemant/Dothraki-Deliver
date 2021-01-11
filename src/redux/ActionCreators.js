@@ -1,7 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseurl';
 import fetch from 'cross-fetch';
-import { Redirect } from 'react-router-dom';
 
 export const loginTrue = () => ({
     type: ActionTypes.USER_LOGIN
@@ -144,16 +143,16 @@ export const postRequestForm = (destination, latitude, longitude, phone, history
         history.push("/login");
         return;
     }
-    const newRequest = {
+    const newRating = {
         destination: destination,
         destination_phone: phone,
         destination_lat: latitude,
         destination_long: longitude
     }
-    console.log(JSON.stringify(newRequest));
+    console.log(JSON.stringify(newRating));
     return fetch(baseUrl + 'users/users/request', {
         method: 'POST',
-        body: JSON.stringify(newRequest),
+        body: JSON.stringify(newRating),
         headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${token}`
@@ -220,7 +219,10 @@ export const fetchRequests = () => (dispatch) => {
         throw errMess;
     })
     .then(response => response.json())
-    .then(requests => dispatch(addRequests(requests.requests)))
+    .then(requests => {
+        dispatch(addRequests(requests.requests));
+        dispatch(fetchUnratedRequests());
+    })
     .catch(err => dispatch(requestsFailed(err.message)));
 };
 
@@ -246,3 +248,102 @@ export const addRoute = (route) => ({
 export const resetRoute = () => ({
     type: ActionTypes.RESET_ROUTE
 });
+
+// Fetching unrated requests
+export const fetchUnratedRequests = () => (dispatch) => {
+    const token = localStorage.getItem('token');
+    if(!token){
+        // alert('User not logged in. Please log in to continue');
+        // history.push("/login");
+        return;
+    }
+    return fetch(baseUrl + 'users/requests/unrated', {
+        headers: {
+            'authorization': `Bearer ${token}`,
+        },
+    })
+    .then(response => {
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error ' + response.status + ": " + response.statusText);
+            if(response.status >= 400 && response.status < 500){
+                localStorage.removeItem('token');
+                dispatch(loginFalse());
+                // history.push("/login");
+            }
+            error.response = response;
+            throw error;
+        }
+    }, 
+    error => {
+        var errMess = new Error(error.message);
+        throw errMess;
+    })
+    .then(response => response.json())
+    .then(requests => dispatch(addUnratedRequests(requests.requests)))
+    .catch(err => dispatch(unratedRequestsFailed(err.message)));
+};
+
+export const unratedRequestsFailed = (errmess) => ({
+    type: ActionTypes.UNRATED_REQUESTS_FAILED,
+    payload: errmess
+});
+
+export const addUnratedRequests = (requests) => ({
+    type: ActionTypes.ADD_UNRATED_REQUESTS,
+    payload: requests
+});
+
+// posting rating for a request
+
+export const postRating = (requestId, rating, feedback, history)  => (dispatch) =>  {
+    const token = localStorage.getItem('token');
+    if(!token){
+        alert('User not logged in. Please log in to continue');
+        history.push("/login");
+        return;
+    }
+    const newRating = {
+        request_id: requestId,
+        rating: rating,
+        feedback: feedback
+    }
+    console.log(JSON.stringify(newRating));
+    return fetch(baseUrl + 'users/ratings/agent', {
+        method: 'POST',
+        body: JSON.stringify(newRating),
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ": " + response.statusText);
+                if(response.status >= 400 && response.status < 500){
+                    localStorage.removeItem('token');
+                    dispatch(loginFalse());
+                }
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errMess = new Error(error.message);
+                throw errMess;
+            })
+        .then(response => response.json())
+        .then(response => {
+            alert(JSON.stringify(response.message));
+            dispatch(fetchUnratedRequests());
+        })
+        .catch(err => {
+            console.log('Rating could not be posted', err.message);
+            alert('Rating could not be posted' + err.message)
+        });
+}

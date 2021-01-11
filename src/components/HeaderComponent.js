@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
 import { NavLink, Link } from 'react-router-dom';
 import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
+import ReactStars from "react-rating-stars-component";
 
-const validEmail = (val) => !required(val) || /^[A-Z0-9._%+-]+@[A-z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
-const required = (val) => val && val.length;
-const validPhone = (val) => !required(val) || ((val) && (val.length === 10));
-const validPassword = (val) => !required(val) || (val && val.length > 7);
-const isNumber = (val) => !isNaN(Number(val));
 
 
 class Header extends Component {
@@ -16,13 +12,14 @@ class Header extends Component {
     
         this.state = {
             isNavOpen: false,
-            // isModalOpen: false,
+            isModalOpen: false,
             // isNavSignUp: false,
             // isModalSignUpOpen: false,
             // role: 'consumer'
         };
         this.toggleNav = this.toggleNav.bind(this);
-    //     this.toggleModal = this.toggleModal.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.handleRating = this.handleRating.bind(this);
     //     this.handleLogin = this.handleLogin.bind(this);
     //     this.toggleNavSignUp = this.toggleNavSignUp.bind(this);
     //     this.toggleModalSignUpOpen = this.toggleModalSignUpOpen.bind(this);
@@ -47,11 +44,20 @@ class Header extends Component {
     //     }
     // }
 
+    handleRating = (value) => {
+        console.log("inside handleRating");
+        // this.setState({
+        //     isModalOpen: false
+        // })
+        this.toggleModal();
+        this.props.postRating(this.props.unratedRequests.requests[0].id, value, "Awesome", this.props.history);
+    }
+
     toggleNav = () => this.setState(
         { isNavOpen: !this.state.isNavOpen });
 
-    // toggleModal = () => this.setState(
-    //     { isModalOpen: !this.state.isModalOpen });
+    toggleModal = () => this.setState(
+        { isModalOpen: !this.state.isModalOpen });
 
     // handleSignUp = async (values) => {
     //     this.toggleModalSignUpOpen();
@@ -66,6 +72,10 @@ class Header extends Component {
 
     // toggleModalSignUpOpen = () => this.setState(
     //     { isModalSignUpOpen: !this.state.isModalSignUpOpen });
+
+    ratingView = (value) => {
+        console.log(value);
+    }
     render() {
         var button;
         if (!this.props.isLoggedIn.isLoggedIn) {
@@ -84,10 +94,10 @@ class Header extends Component {
                     </NavLink>
                 </NavItem>
             </Nav>;
-
+            
         }
         else {
-            console.log(this.props.isLoggedIn.isLoggedIn);
+            // console.log(this.props.isLoggedIn.isLoggedIn);
             button = <Nav className="ml-auto" navbar>
                 <NavItem>
                     <NavLink to="/pendingrequests" className="nav-link" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
@@ -101,6 +111,11 @@ class Header extends Component {
                 </NavLink></NavItem>
             </Nav>;
 
+            if(this.props.unratedRequests.requests.length !== 0 && !this.state.isModalOpen){
+                // unratedRequests = <RatingStar onChange={this.ratingView}/>;
+                console.log("length of requests is greater than one");
+                this.setState({isModalOpen: true});
+            }
         }
         return (
             <>
@@ -129,63 +144,26 @@ class Header extends Component {
                         </div>
                     </div>
                 </Jumbotron>
-                {/* <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                {/* {unratedRequests} */}
+                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                     <ModalBody>
-                        <Form model="login" onSubmit={(values) => this.handleLogin(values)}>
-                            <Row className="form-group">
-                                <Label htmlFor="email" md={2}>E-mail</Label>
-                                <Col md={10}>
-                                    <Control.text model=".email" type="email" id="email" name="email" placeholder="Email Id" className="form-control"
-                                        validators={{ required, validEmail }}
-                                    ></Control.text>
-                                    <Errors
-                                        className="text-danger"
-                                        model=".email"
-                                        show="touched"
-                                        messages={{
-                                            required: 'Required',
-                                            validEmail: 'Must be a valid email'
-                                        }}
-                                    /></Col>
-                            </Row>
-                            <Row className="form-group">
-                                <Label htmlFor="password" md={2}>Password</Label>
-                                <Col md={10}>
-                                    <Control.text model=".password" type="password" id="password" name="password"
-                                        placeholder="Password" className="form-control" validators={{ required }}
-                                    ></Control.text>
-                                    <Errors
-                                        className="text-danger"
-                                        model=".password"
-                                        show="touched"
-                                        messages={{
-                                            required: 'Required'
-                                        }}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className="form-group">
-                                <Col md={10}>
-                                    <div className="form-check">
-                                        <Label check>
-                                            <Control.checkbox model=".remember" name="remember" className="form-check-input" />
-                                    Remember me
-                                </Label>
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row className="form-group">
+                    <ReactStars
+                count={5}
+                onChange={this.handleRating}
+                size={24}
+                activeColor="#ffd700"
+            />
+                            {/* <Row className="form-group">
                                 <Col md={{ size: 7, offset: 5 }}>
-                                    <Button type="submit" color="primary">
+                                    <Button type="submit" color="primary" >
                                         Login
                                     </Button>
                                 </Col>
-                            </Row>
-                        </Form>
+                            </Row> */}
                     </ModalBody>
                 </Modal>
-                <Modal isOpen={this.state.isModalSignUpOpen} toggle={this.toggleModalSignUpOpen}>
+                {/*<Modal isOpen={this.state.isModalSignUpOpen} toggle={this.toggleModalSignUpOpen}>
                     <ModalHeader toggle={this.toggleModalSignUpOpen}>Sign Up</ModalHeader>
                     <ModalBody>
                         <Form model="signup" onSubmit={(values) => this.handleSignUp(values)}>

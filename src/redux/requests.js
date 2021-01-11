@@ -19,3 +19,17 @@ export const Requests = (state = { errMess: null, isLoading: false, requests:[]}
         return state;
     }
   };
+
+  export const UnratedRequests = (state = { errMess: null, requests:[]}, action) => {
+    switch (action.type) {
+      case ActionTypes.ADD_UNRATED_REQUESTS:
+        return {...state, errMess: null, requests: action.payload};
+  
+      case ActionTypes.UNRATED_REQUESTS_FAILED:
+        return {...state, errMess: action.payload, requests: []};
+  
+  
+      default:
+        return state;
+    }
+  };
