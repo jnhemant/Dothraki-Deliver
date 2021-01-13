@@ -140,7 +140,7 @@ export const signOut = () => (dispatch) => {
 export const postRequestForm = (destination, latitude, longitude, phone, history)  => (dispatch) =>  {
     const token = localStorage.getItem('token');
     if(!token){
-        alert('User not logged in. Please log in to continue');
+        // alert('User not logged in. Please log in to continue');
         history.push("/login");
         return;
     }

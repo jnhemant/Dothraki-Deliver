@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
+import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Form, FormGroup, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
 import { NavLink, Link } from 'react-router-dom';
-import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
+// import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
 import ReactStars from "react-rating-stars-component";
 
 
@@ -85,10 +85,21 @@ class Header extends Component {
     ratingView = (value) => {
         console.log(value);
     }
+
+    
+    static getDerivedStateFromProps(props, state) {
+        if(props.unratedRequests.requests.length !== 0 && !state.isModalOpen){
+            console.log("length of requests is greater than one");
+            return {isModalOpen: true};
+        }
+        return null;
+        // return {favoritecolor: props.favcol };
+    }
+    
     render() {
         var button;
         if (!this.props.isLoggedIn.isLoggedIn) {
-            console.log(this.props.isLoggedIn.isLoggedIn);
+            // console.log(this.props.isLoggedIn.isLoggedIn);
             button = <Nav className="ml-auto" navbar>
                 <NavItem>
                     <NavLink className="nav-link" to="/login"  style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
@@ -120,11 +131,11 @@ class Header extends Component {
                 </NavLink></NavItem>
             </Nav>;
 
-            
-            if(this.props.unratedRequests.requests.length !== 0 && !this.state.isModalOpen){
-                console.log("length of requests is greater than one");
-                this.setState({isModalOpen: true});
-            }
+            //State should not the changed inside render function *****IMPORTANT*****
+            // if(this.props.unratedRequests.requests.length !== 0 && !this.state.isModalOpen){
+            //     console.log("length of requests is greater than one");
+            //     this.setState({isModalOpen: true});
+            // }
         }
         return (
             <>
