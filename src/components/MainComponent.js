@@ -102,6 +102,7 @@ class Main extends Component{
                 targetRoute={this.props.targetRoute}
                 resetRoute={this.props.resetRoute}
                 fetchRequests={this.props.fetchRequests}
+                history={this.props.history}
                 />
             )
         };

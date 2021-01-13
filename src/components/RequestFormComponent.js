@@ -11,7 +11,9 @@ const isNumber = (val) => !isNaN(Number(val));
 const RequestForm = (props) => {
     const handleSubmit = async (values) => {
         await props.postRequestForm(values.destination, values.latitude, values.longitude, values.phone, props.history);
-        props.resetRequestForm();
+        // if(props.history.length === 1){
+        //     props.resetRequestForm();
+        // }        
     }
 
     return (

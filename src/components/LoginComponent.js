@@ -8,9 +8,10 @@ const required = (val) => val && val.length;
 
 
 const AuthAlert = (props) => {
-    if(props.currentRoute === "/home"){
+    if(props.currentRoute === "/home" && props.history.length === 0){
         return(<div></div>);
     }
+        
     return(
         <div>
             <span style={{color:"red"}}><p>*You must log in first</p></span>
@@ -43,7 +44,7 @@ const Login = (props) => {
     return (
         <div className="container row row-content">
              <div className="col-12 col-md-7 offset-md-2 pending_request">
-             <AuthAlert currentRoute={props.targetRoute.targetRoute}/>
+             <AuthAlert currentRoute={props.targetRoute.targetRoute} history={props.history}/>
         <Form model="login" onSubmit={(values) => handleLogin(values)}>
             <Row className="form-group">
                 <Label htmlFor="email" md={2}>E-mail</Label>

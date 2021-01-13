@@ -1,6 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseurl';
 import fetch from 'cross-fetch';
+import {actions} from 'react-redux-form';
 
 export const loginTrue = () => ({
     type: ActionTypes.USER_LOGIN
@@ -181,10 +182,13 @@ export const postRequestForm = (destination, latitude, longitude, phone, history
         .then(response => {
             alert(JSON.stringify(response.message));
             history.push("/pendingrequests");
+            dispatch(actions.reset('request'));
+            dispatch(fetchRequests());
         })
         .catch(err => {
             console.log('Request could not be created ', err.message);
-            alert('Request creation unsuccessful!\nError: ' + err.message)
+            alert('Request creation unsuccessful!\nError: ' + err.message);
+            dispatch(actions.reset('request'));
         });
 }
 
