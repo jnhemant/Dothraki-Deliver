@@ -12,7 +12,9 @@ class Header extends Component {
     
         this.state = {
             isNavOpen: false,
-            isModalOpen: false,
+            isModalOpen: false, //set to false initially
+            rating: 1,
+            message: ''
             // isNavSignUp: false,
             // isModalSignUpOpen: false,
             // role: 'consumer'
@@ -20,6 +22,8 @@ class Header extends Component {
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.handleRating = this.handleRating.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     //     this.handleLogin = this.handleLogin.bind(this);
     //     this.toggleNavSignUp = this.toggleNavSignUp.bind(this);
     //     this.toggleModalSignUpOpen = this.toggleModalSignUpOpen.bind(this);
@@ -45,18 +49,38 @@ class Header extends Component {
     // }
 
     handleRating = async (value) => {
-        console.log("inside handleRating");
+        this.setState({rating: value});
+        // if(this.props.unratedRequests.requests.length !== 0){
+        //     await this.props.postRating(this.props.unratedRequests.requests[0].id, value, "Awesome", this.props.history);
+        // }        
+        // this.toggleModal();      
+        // this.props.history.push('/home');
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+    
+        this.setState({
+          [name]: value
+        });
+    }
+
+    async handleSubmit(event) {
+        console.log('Current State is: ' + JSON.stringify(this.state));
+        // alert('Current State is: ' + JSON.stringify(this.state));
+        event.preventDefault();
         if(this.props.unratedRequests.requests.length !== 0){
-            await this.props.postRating(this.props.unratedRequests.requests[0].id, value, "Awesome", this.props.history);
+            await this.props.postRating(this.props.unratedRequests.requests[0].id, this.state.rating, this.state.message, this.props.history);
         }        
         this.toggleModal();      
-        this.props.history.push('/home');
     }
 
     handleDefaultRating = async () => {
         console.log("inside handleRating");
         if(this.props.unratedRequests.requests.length !== 0){
-            await this.props.postRating(this.props.unratedRequests.requests[0].id, 1, "Awesome", this.props.history);
+            await this.props.postRating(this.props.unratedRequests.requests[0].id, 1, "", this.props.history);
         }        
         this.toggleModal();      
         this.props.history.push('/home');
@@ -93,7 +117,6 @@ class Header extends Component {
             return {isModalOpen: true};
         }
         return null;
-        // return {favoritecolor: props.favcol };
     }
     
     render() {
@@ -136,6 +159,17 @@ class Header extends Component {
             //     console.log("length of requests is greater than one");
             //     this.setState({isModalOpen: true});
             // }
+            var unratedRequestDetails = <div></div>;
+            if(this.props.isLoggedIn.isLoggedIn && this.props.unratedRequests.requests.length !== 0){
+                unratedRequestDetails = <div>
+                    <h4>Request details:</h4>
+                            <h6>Pickup location: {this.props.unratedRequests.requests[0].consumerAddress}</h6>
+                            <h6>Dropoff location: {this.props.unratedRequests.requests[0].destinationAddress}</h6>
+                            <h6>Date and Time: {new Intl.DateTimeFormat('en-US', 
+                            { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Asia/Kolkata' })
+                            .format(new Date(Date.parse(this.props.unratedRequests.requests[0].dateTime)))}</h6>
+                </div>
+            }
         }
         return (
             <>
@@ -168,12 +202,39 @@ class Header extends Component {
                  <Modal isOpen={this.state.isModalOpen} toggle={this.handleDefaultRating}>
                     <ModalHeader toggle={this.handleDefaultRating}>How was your experience with us?</ModalHeader>
                     <ModalBody>
-                    <ReactStars
-                count={5}
-                onChange={this.handleRating}
-                size={24}
-                activeColor="#ffd700"
-            />
+                        <div className="col-12">
+                            {unratedRequestDetails}
+                            <Form onSubmit={this.handleSubmit}>
+                                <FormGroup row>
+                                    <Label htmlFor="rating" md={2}>Rating</Label>
+                                    <Col md={10}>
+                                        <ReactStars
+                                            name="rating"
+                                            count={5}
+                                            onChange={this.handleRating}
+                                            size={24}
+                                            activeColor="#ffd700"
+                                        />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label htmlFor="message" md={2}>Feedback</Label>
+                                    <Col md={10}>
+                                        <Input type="textarea" id="message" name="message"
+                                            value={this.state.message}
+                                            onChange={this.handleInputChange}></Input>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Col md={{ size: 7, offset: 5 }}>
+                                        <Button type="submit" color="primary">
+                                            Send Feedback
+                                    </Button>
+                                    </Col>
+                                </FormGroup>
+                            </Form>
+                        </div>
+
                             {/* <Row className="form-group">
                                 <Col md={{ size: 7, offset: 5 }}>
                                     <Button type="submit" color="primary" >

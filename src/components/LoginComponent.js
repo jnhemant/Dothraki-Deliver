@@ -8,10 +8,10 @@ const required = (val) => val && val.length;
 
 
 const AuthAlert = (props) => {
-    if(props.currentRoute === "/home" && props.history.length === 0){
+    if(props.currentRoute === "/home" || props.currentRoute === "/login"){
         return(<div></div>);
     }
-        
+    console.log(props.history);
     return(
         <div>
             <span style={{color:"red"}}><p>*You must log in first</p></span>
