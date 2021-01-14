@@ -5,6 +5,7 @@ import { InitialLogin, InitialRequestForm, InitialSignup } from './forms';
 import { UserLogin } from './userLogin';
 import { Requests, UnratedRequests } from './requests';
 import { TargetRoute } from './targetRoute';
+import { ProtectedRoute } from './protectedRoute';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
@@ -15,6 +16,7 @@ export const ConfigureStore = () => {
             requests: Requests,
             unratedRequests: UnratedRequests,
             targetRoute: TargetRoute,
+            protectedRoute: ProtectedRoute,
             ...createForms({
                 login: InitialLogin,
                 signup: InitialSignup,

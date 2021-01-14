@@ -5,7 +5,7 @@ import { Loading } from './LoadingComponent';
 
 const PendingRequests = (props) => {
     if(!props.isLoggedIn.isLoggedIn){
-        props.addRoute("/pendingrequests");
+        props.addTargetRoute("/pendingrequests");
         console.log(props.targetRoute);
         return <Redirect to="/login"/>
     }

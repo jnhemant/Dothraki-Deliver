@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Label, Row, Col } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { Control, Errors, Form } from 'react-redux-form';
@@ -12,14 +12,14 @@ const isNumber = (val) => !isNaN(Number(val));
 const Signup = (props) => {
     const [role, setRole] = useState("consumer");
 
-
-    if(props.isLoggedIn.isLoggedIn){
-        var currentRoute = props.targetRoute.targetRoute;
-        console.log("targetRoute is :" + currentRoute);
-        props.resetRoute();
-        props.fetchRequests();
-        return(<Redirect to={currentRoute} />)       
-    }
+    // Uncomment if you wanna redirect the logged in user to current page
+    // if(props.isLoggedIn.isLoggedIn){
+    //     var currentRoute = props.targetRoute.targetRoute;
+    //     console.log("targetRoute is :" + currentRoute);
+    //     props.resetRoute();
+    //     props.fetchRequests();
+    //     return(<Redirect to={currentRoute} />)       
+    // }
     
     
     const handleSignUp = async (values) => {

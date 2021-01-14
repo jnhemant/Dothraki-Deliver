@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import {  Button, Label, Row, Col } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { Control, Errors, Form } from 'react-redux-form';
@@ -7,11 +7,14 @@ const validEmail = (val) => !required(val) || /^[A-Z0-9._%+-]+@[A-z0-9.-]+\.[A-Z
 const required = (val) => val && val.length;
 
 
+
 const AuthAlert = (props) => {
-    if(props.currentRoute === "/home" || props.currentRoute === "/login"){
+    // console.log(props.protectedRoute.protectedRoute);
+    if( props.currentRoute === "/login" && !props.protectedRoute.protectedRoute){
         return(<div></div>);
     }
-    console.log(props.history);
+    
+    // console.log(props.history);
     return(
         <div>
             <span style={{color:"red"}}><p>*You must log in first</p></span>
@@ -20,6 +23,7 @@ const AuthAlert = (props) => {
 }
 
 const Login = (props) => {
+    
     const handleLogin = async (values) => {
         // this.toggleModal();
     
@@ -32,19 +36,23 @@ const Login = (props) => {
             props.resetLoginForm();
         }
     }
+
+
     if(props.isLoggedIn.isLoggedIn){
         var currentRoute = props.targetRoute.targetRoute;
         console.log("targetRoute is :" + currentRoute);
-        props.resetRoute();
+        props.resetTargetRoute();
         props.fetchRequests();
         return(<Redirect to={currentRoute} />)       
     }
 
+
+    
     
     return (
         <div className="container row row-content">
              <div className="col-12 col-md-7 offset-md-2 pending_request">
-             <AuthAlert currentRoute={props.targetRoute.targetRoute} history={props.history}/>
+             <AuthAlert currentRoute={props.targetRoute.targetRoute} protectedRoute={props.protectedRoute}/>
         <Form model="login" onSubmit={(values) => handleLogin(values)}>
             <Row className="form-group">
                 <Label htmlFor="email" md={2}>E-mail</Label>

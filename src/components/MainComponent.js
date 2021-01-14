@@ -5,11 +5,10 @@ import RequestForm from './RequestFormComponent';
 import Login from './LoginComponent';
 import Signup from './SignupComponent';
 import PendingRequests from './PendingRequestsComponent';
-import RatingStar from './RatingStarComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postSignUp, postLogin, signOut, postRequestForm, fetchRequests,
-     addRoute, resetRoute, fetchUnratedRequests, postRating } from '../redux/ActionCreators';
+     addRoute, resetRoute, fetchUnratedRequests, postRating, addTargetRoute, resetTargetRoute } from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { createBrowserHistory } from 'history';
 
@@ -17,12 +16,12 @@ import { createBrowserHistory } from 'history';
 var history = createBrowserHistory();
 
 // Get the current location.
-var location = history.location;
+// var location = history.location;
 
 // Listen for changes to the current location.
-let unlisten = history.listen(({ location, action }) => {
-    console.log(action, location.pathname, location.state);
-  });
+// let unlisten = history.listen(({ location, action }) => {
+//     console.log(action, location.pathname, location.state);
+//   });
 
 //   history.push('/pendingrequests');
 
@@ -30,6 +29,7 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.isLoggedIn,
         requests: state.requests,
+        protectedRoute: state.protectedRoute,
         targetRoute: state.targetRoute,
         unratedRequests: state.unratedRequests
     }
@@ -44,10 +44,12 @@ const mapDispatchToProps = dispatch => ({
     postRequestForm: (destination, latitude, longitude, phone, history) => dispatch(postRequestForm(destination, latitude, longitude, phone, history)),
     resetRequestForm: () => { dispatch(actions.reset('request'))},
     fetchRequests: () => dispatch(fetchRequests()),
-    addRoute: (route) => dispatch(addRoute(route)),
+    addRoute: () => dispatch(addRoute()),
     resetRoute: () => dispatch(resetRoute()),
     fetchUnratedRequests: (history) => dispatch(fetchUnratedRequests(history)),
-    postRating: (requestId, rating, feedback, history) => dispatch(postRating(requestId, rating, feedback, history))
+    postRating: (requestId, rating, feedback, history) => dispatch(postRating(requestId, rating, feedback, history)),
+    addTargetRoute: (route) => dispatch(addTargetRoute(route)),
+    resetTargetRoute: () => dispatch(resetTargetRoute())
   });
 
 class Main extends Component{
@@ -60,6 +62,7 @@ class Main extends Component{
         this.props.fetchUnratedRequests(history);
     }
 
+    // Not a good practice since state will keep changing till infinity
     // componentDidUpdate() {
     //     this.props.fetchUnratedRequests(history);
     // }
@@ -71,6 +74,7 @@ class Main extends Component{
             postRequestForm={this.props.postRequestForm} 
             resetRequestForm={this.props.resetRequestForm}             
             history={this.props.history}
+            resetRoute={this.props.resetRoute}
             />
             )
         }
@@ -80,8 +84,11 @@ class Main extends Component{
                 isLoggedIn={this.props.isLoggedIn}
                 requests={this.props.requests.requests}
                 errMess={this.props.requests.errMess}
-                addRoute={this.props.addRoute}
+                addTargetRoute={this.props.addTargetRoute}
                 fetchRequests={this.props.fetchRequests}
+                history={this.props.history}
+                resetRoute={this.props.resetRoute}
+                targetRoute={this.props.targetRoute}
                 />
             );
             // if (this.props.isLoggedIn.isLoggedIn) {
@@ -99,10 +106,12 @@ class Main extends Component{
                 <Login isLoggedIn={this.props.isLoggedIn}
                 resetLoginForm={this.props.resetLoginForm}
                 postLogin={this.props.postLogin}
-                targetRoute={this.props.targetRoute}
+                protectedRoute={this.props.protectedRoute}
                 resetRoute={this.props.resetRoute}
+                resetTargetRoute={this.props.resetTargetRoute}
                 fetchRequests={this.props.fetchRequests}
                 history={this.props.history}
+                targetRoute={this.props.targetRoute}
                 />
             )
         };
@@ -113,7 +122,8 @@ class Main extends Component{
                 isLoggedIn={this.props.isLoggedIn}
                 resetSignUpForm={this.props.resetSignUpForm}
                 postSignUp={this.props.postSignUp}
-                targetRoute={this.props.targetRoute}
+                protectedRoute={this.props.protectedRoute}
+                resetRoute={this.props.resetRoute}
                 resetRoute={this.props.resetRoute}
             />
             );            

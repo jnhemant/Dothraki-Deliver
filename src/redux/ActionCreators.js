@@ -11,7 +11,7 @@ export const loginFalse = () => ({
     type: ActionTypes.USER_LOGOUT
 });
 
-export const postLogin = (email, password, targetRoute) => (dispatch) => {
+export const postLogin = (email, password) => (dispatch) => {
     const userCredentials = {
         email: email,
         password: password
@@ -43,6 +43,7 @@ export const postLogin = (email, password, targetRoute) => (dispatch) => {
             alert(JSON.stringify(response));
             localStorage.setItem('token', response.token);
             dispatch(loginTrue());
+            dispatch(resetRoute());
         })
         .catch(err => {
             console.log('Log In not successful ', err.message);
@@ -141,6 +142,7 @@ export const postRequestForm = (destination, latitude, longitude, phone, history
     const token = localStorage.getItem('token');
     if(!token){
         // alert('User not logged in. Please log in to continue');
+        dispatch(addRoute());
         history.push("/login");
         return;
     }
@@ -244,9 +246,20 @@ export const addRequests = (requests) => ({
     payload: requests
 });
 
-export const addRoute = (route) => ({
-    type: ActionTypes.ADD_ROUTE,
+
+// ProtectedRoute action types
+export const addTargetRoute = (route) => ({
+    type: ActionTypes.ADD_TARGETROUTE,
     payload: route
+});
+
+export const resetTargetRoute = () => ({
+    type: ActionTypes.RESET_TARGETROUTE
+});
+
+// TargetRoute functions
+export const addRoute = (route) => ({
+    type: ActionTypes.ADD_ROUTE
 });
 
 export const resetRoute = () => ({
@@ -351,3 +364,4 @@ export const postRating = (requestId, rating, feedback, history)  => (dispatch) 
             alert('Rating could not be posted' + err.message)
         });
 }
+
