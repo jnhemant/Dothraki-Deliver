@@ -9,8 +9,6 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 
 const RequestForm = (props) => {
-
-
     const handleSubmit = async (values) => {
         await props.postRequestForm(values.destination, values.latitude, values.longitude, values.phone, props.history);
         // if(props.history.length === 1){
@@ -21,7 +19,7 @@ const RequestForm = (props) => {
     return (
         <div className="container row row-content">
             <div className="col-12 col-md-7 offset-md-2 request_form">
-                <Form model="request" onSubmit={(values) => handleSubmit(values)}>
+                <Form id="create-request" model="request" onSubmit={(values) => handleSubmit(values)}>
                     <Row className="form-group">
                         <Label htmlFor="destination" md={4}>Destination Address</Label>
                         <Col md={8}>

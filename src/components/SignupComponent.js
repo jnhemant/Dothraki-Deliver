@@ -31,7 +31,7 @@ const Signup = (props) => {
     return (
         <div className="container row row-content">
              <div className="col-12 col-md-7 offset-md-2 pending_request">
-        <Form model="signup" onSubmit={(values) => handleSignUp(values)}>
+        <Form id="signup-form" model="signup" onSubmit={(values) => handleSignUp(values)}>
             <Row className="form-group">
                 <Label htmlFor="name" md={4}>Full Name</Label>
                 <Col md={8}>

@@ -53,7 +53,7 @@ const Login = (props) => {
         <div className="container row row-content">
              <div className="col-12 col-md-7 offset-md-2 pending_request">
              <AuthAlert currentRoute={props.targetRoute.targetRoute} protectedRoute={props.protectedRoute}/>
-        <Form model="login" onSubmit={(values) => handleLogin(values)}>
+        <Form id="login-form" model="login" onSubmit={(values) => handleLogin(values)}>
             <Row className="form-group">
                 <Label htmlFor="email" md={2}>E-mail</Label>
                 <Col md={10}>

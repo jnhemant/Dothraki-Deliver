@@ -2,12 +2,13 @@ import React from 'react';
 import { Table, Row, Col, Button} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { HashLink } from 'react-router-hash-link';
 
 const PendingRequests = (props) => {
     if(!props.isLoggedIn.isLoggedIn){
         props.addTargetRoute("/pendingrequests");
         console.log(props.targetRoute);
-        return <Redirect to="/login"/>
+        return <Redirect to="/login#login-form"/>
     }
     if (props.errMess) {
         return (
@@ -56,12 +57,12 @@ const PendingRequests = (props) => {
         <div className='container pending_request'>
             <Row style={{padding: "10px 0px 10px 0px"}}>
             <Col md={6} sm={3} xs={3}>
-                    <Link to=".home" target="_blank">
+                    <HashLink smooth to="/home#create-request" target="_blank">
                         <Button>
                             <span className="fa fa-external-link-square fa=lg"></span>
                             {' '}Create new request
                         </Button>
-                    </Link>
+                    </HashLink>
                 </Col>
             </Row>
             <Row style={{padding: "20px 0px 5px 0px"}}>                
@@ -69,7 +70,7 @@ const PendingRequests = (props) => {
                     <h4>Pending Requests</h4>
                 </Col>
             </Row>
-        <Table responsive borderless hover striped className='text-center' size='md'>
+        <Table responsive borderless hover striped className='text-center' size='md' id="pending-requests">
             <thead>
                 <tr>
                     <th>#</th>

@@ -3,7 +3,7 @@ import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, 
 import { NavLink, Link } from 'react-router-dom';
 // import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
 import ReactStars from "react-rating-stars-component";
-
+import { NavHashLink } from "react-router-hash-link";
 
 
 class Header extends Component {
@@ -125,16 +125,16 @@ class Header extends Component {
             // console.log(this.props.isLoggedIn.isLoggedIn);
             button = <Nav className="ml-auto" navbar>
                 <NavItem>
-                    <NavLink className="nav-link" to="/login"  style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                    <NavHashLink className="nav-link" smooth to="/login#login-form"  style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
                         activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
                         <span className="fa fa-sign-in fa-lg"></span>{' '}Login
-                    </NavLink>
+                    </NavHashLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className="nav-link" to="/signup" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                    <NavHashLink className="nav-link" smooth to="/signup#signup-form" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
                         activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
                         <span className="fa fa-user-plus fa-lg"></span>{' '}Sign Up
-                    </NavLink>
+                    </NavHashLink>
                 </NavItem>
             </Nav>;
             
@@ -143,10 +143,10 @@ class Header extends Component {
             // console.log(this.props.isLoggedIn.isLoggedIn);
             button = <Nav className="ml-auto" navbar>
                 <NavItem>
-                    <NavLink to="/pendingrequests" className="nav-link" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                    <NavHashLink smooth to="/pendingrequests#pending-requests" className="nav-link" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
                         activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
                         Pending Requests
-                    </NavLink>
+                    </NavHashLink>
                     </NavItem>
                 <NavItem><NavLink to="/home" className="nav-link" onClick={this.props.signOut} style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
                     activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
