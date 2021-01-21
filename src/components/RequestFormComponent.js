@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Link, NavLink, Redirect, Prompt } from 'react-router-dom';
 import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
 
 const required = (val) => val && val.length;
@@ -9,22 +9,37 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 
 const RequestForm = (props) => {
+    const [formIsHalfFilledOut, setFormIsHalfFilledOut] = useState(false);
     const handleSubmit = async (values) => {
+        setFormIsHalfFilledOut(false);
         await props.postRequestForm(values.destination, values.latitude, values.longitude, values.phone, props.history);
+        //reset logic moved to ActionCreators.js
         // if(props.history.length === 1){
         //     props.resetRequestForm();
         // }        
     }
 
+    useEffect(() => {
+        if (formIsHalfFilledOut) {
+            window.onbeforeunload = () => true
+        } else {
+            window.onbeforeunload = undefined
+        }
+    });
+
     return (
         <div className="container row row-content">
             <div className="col-12 col-md-7 offset-md-2 request_form">
                 <Form id="create-request" model="request" onSubmit={(values) => handleSubmit(values)}>
-                    <Row className="form-group">
+                    <Prompt
+                        when={formIsHalfFilledOut}
+                        message="Are you sure you want to leave?"
+                    /><Row className="form-group">
                         <Label htmlFor="destination" md={4}>Destination Address</Label>
                         <Col md={8}>
                             <Control.text model=".destination" id="destination" name="destination" placeholder="Street, Landmark, City"
                                 className="form-control" validators={{ required, minLength: minLength(10), maxLength: maxLength(25) }}
+                                onChange={(event) => { !formIsHalfFilledOut && setFormIsHalfFilledOut(event.target.value.length > 0) }}
                             ></Control.text>
                             <Errors className="text-danger" model=".destination" show="touched"
                                 messages={{
@@ -40,7 +55,9 @@ const RequestForm = (props) => {
                         <Col md={8}>
                             <Control.text model=".latitude" id="latitude" name="latitude" placeholder="xx.xxxx"
                                 validators={{ required, minLength: minLength(7), maxLength: maxLength(10) }}
-                                className="form-control"></Control.text>
+                                className="form-control"
+                                onChange={(event) => { !formIsHalfFilledOut && setFormIsHalfFilledOut(event.target.value.length > 0) }}>
+                            </Control.text>
                             <Errors
                                 className="text-danger"
                                 model=".latitude"
@@ -59,6 +76,7 @@ const RequestForm = (props) => {
                             <Control.text model=".longitude" id="longitude" name="longitude"
                                 placeholder="yy.yyyy" className="form-control"
                                 validators={{ required, minLength: minLength(7), maxLength: maxLength(10) }}
+                                onChange={(event) => { !formIsHalfFilledOut && setFormIsHalfFilledOut(event.target.value.length > 0) }}
                             ></Control.text>
                             <Errors
                                 className="text-danger"
@@ -78,6 +96,7 @@ const RequestForm = (props) => {
                             <Control.text model=".phone" id="phone" name="phone"
                                 placeholder="Phone number of receiver" className="form-control"
                                 validators={{ required, minLength: minLength(10), maxLength: maxLength(10), isNumber }}
+                                onChange={(event) => { !formIsHalfFilledOut && setFormIsHalfFilledOut(event.target.value.length > 0) }}
                             ></Control.text>
                             <Errors
                                 className="text-danger"
