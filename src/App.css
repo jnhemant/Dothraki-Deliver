@@ -51,8 +51,9 @@ address{
   border-top: 2vh solid rgb(2, 194, 194);
   padding: 2rem 2rem 2rem 2rem;
   background-color: white;
-  color: rgb(85, 85, 85);
+  color: rgb(110, 110, 110);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2vh;
 }
 
 .requestFormButton{
