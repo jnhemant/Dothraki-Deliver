@@ -36,7 +36,7 @@ const RequestForm = (props) => {
                                 <div className="container">
                                 <div className="jumbotext">
                                 {/* <h1>Dothraki Delivery<span style={{color:"teal"}}>.</span></h1> */}
-                                <span>Wanna send goods to your loved ones, but cannot go personally? We got you covered!</span>
+                                <span>Wanna Send goods to your loved ones?</span>
                                 </div></div>
                             </div>
                         <div className="col-md-4 col-sm-12">
