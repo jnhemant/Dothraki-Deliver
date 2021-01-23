@@ -185,19 +185,7 @@ class Header extends Component {
 
                         </Collapse>
                     </div>
-                </Navbar>
-                <Jumbotron>
-                    <div className="container">
-                        <div className="row row-header">
-                            <div className="col-12 col-sm-6">
-                                <div className="jumbotext">
-                                    <h1>Dothraki Delivery</h1>
-                                    <p>Wanna send goods to your loved ones, but cannot go personally? We got you covered!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Jumbotron>
+                </Navbar>                
                 {/* {unratedRequests} */}
                  <Modal isOpen={this.state.isModalOpen} toggle={this.handleDefaultRating}>
                     <ModalHeader toggle={this.handleDefaultRating}>How was your experience with us?</ModalHeader>

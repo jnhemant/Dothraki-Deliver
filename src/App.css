@@ -16,16 +16,25 @@
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
-  padding:70px 30px 70px 30px;
+  /* padding:2vh 2vh 2vh 2vh; */
   border-radius: 0 !important;
   margin:0px auto;
-  height: 90vh;
-  background-image: url('./shared/images/jumbotron.jpg');
+  background-image: url('./shared/images/jumbo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   color:floralwhite;
 }
 
 .jumbotext{
-  margin: -30px 10px 10px 10px;
+  /* padding: 1rem 1rem 1rem 1rem; */
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  font-size: 6vh;
 }
 
 address{
@@ -39,11 +48,16 @@ address{
 }
 
 .request_form{
-  padding: 10px 10px 0 10px;
+  border-top: 2vh solid rgb(2, 194, 194);
+  padding: 2rem 2rem 2rem 2rem;
+  background-color: white;
+  color: rgb(85, 85, 85);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .requestFormButton{
-  background-color: #242b2c;
+  background-color: rgb(2, 194, 194);
+  border: none;
 }
 
 .requests-wrapper{
@@ -52,6 +66,34 @@ address{
 
 .pending_request{
   padding: 20px 10px 20px 10px;
+}
+
+@media screen and (max-width: 1030px) {
+  .jumbotext{
+    padding: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 3vh;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .jumbotext{
+    padding-bottom: 4vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    position: inherit;
+    top: auto;
+    transform: inherit;
+    font-size: 3vh;
+    color: rgb(7, 7, 7);
+    font-weight: bold;
+  }
 }
 
 

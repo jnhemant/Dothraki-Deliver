@@ -28,15 +28,29 @@ const RequestForm = (props) => {
     });
 
     return (
-        <div className="container row row-content">
-            <div className="col-12 col-md-7 offset-md-2 request_form">
+        <>
+        <Jumbotron>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-8 col-sm-12">
+                                <div className="container">
+                                <div className="jumbotext">
+                                {/* <h1>Dothraki Delivery<span style={{color:"teal"}}>.</span></h1> */}
+                                <span>Wanna send goods to your loved ones, but cannot go personally? We got you covered!</span>
+                                </div></div>
+                            </div>
+                        <div className="col-md-4 col-sm-12">
+                            <div className="container">
+                            <div className="row">                           
+            <div className="request_form">
+                <h4>Create a request</h4>
                 <Form id="create-request" model="request" onSubmit={(values) => handleSubmit(values)}>
                     <Prompt
                         when={formIsHalfFilledOut}
                         message="Are you sure you want to leave?"
                     /><Row className="form-group">
-                        <Label htmlFor="destination" md={4}>Destination Address</Label>
-                        <Col md={8}>
+                        <Label htmlFor="destination" md={12} sm={12}>Destination Address</Label>
+                        <Col md={12} sm={12}>
                             <Control.text model=".destination" id="destination" name="destination" placeholder="Street, Landmark, City"
                                 className="form-control" validators={{ required, minLength: minLength(10), maxLength: maxLength(25) }}
                                 onChange={(event) => { !formIsHalfFilledOut && setFormIsHalfFilledOut(event.target.value.length > 0) }}
@@ -51,8 +65,8 @@ const RequestForm = (props) => {
                         </Col>
                     </Row>
                     <Row className="form-group">
-                        <Label htmlFor="latitude" md={4}>Destination Latitude</Label>
-                        <Col md={8}>
+                        <Label htmlFor="latitude"  md={12} sm={12}>Destination Latitude</Label>
+                        <Col  md={12} sm={12}>
                             <Control.text model=".latitude" id="latitude" name="latitude" placeholder="xx.xxxx"
                                 validators={{ required, minLength: minLength(7), maxLength: maxLength(10) }}
                                 className="form-control"
@@ -71,8 +85,8 @@ const RequestForm = (props) => {
                         </Col>
                     </Row>
                     <Row className="form-group">
-                        <Label htmlFor="longitude" md={4}>Destination Longitude</Label>
-                        <Col md={8}>
+                        <Label htmlFor="longitude" md={12} sm={12}>Destination Longitude</Label>
+                        <Col md={12} sm={12}>
                             <Control.text model=".longitude" id="longitude" name="longitude"
                                 placeholder="yy.yyyy" className="form-control"
                                 validators={{ required, minLength: minLength(7), maxLength: maxLength(10) }}
@@ -91,8 +105,8 @@ const RequestForm = (props) => {
                         </Col>
                     </Row>
                     <Row className="form-group">
-                        <Label htmlFor="phone" md={4}>Destination's Contact No.</Label>
-                        <Col md={8}>
+                        <Label htmlFor="phone"  md={12} sm={12}>Destination's Contact No.</Label>
+                        <Col  md={12} sm={12}>
                             <Control.text model=".phone" id="phone" name="phone"
                                 placeholder="Phone number of receiver" className="form-control"
                                 validators={{ required, minLength: minLength(10), maxLength: maxLength(10), isNumber }}
@@ -112,8 +126,8 @@ const RequestForm = (props) => {
                         </Col>
                     </Row>
                     <Row className="form-group">
-                        <Col md={{ size: 8, offset: 4 }}>
-                            <Button type="submit" className="requestFormButton">
+                        <Col md={{ size: 12, offset: 0 }} sm={{size: 12, offset: 0}}>
+                            <Button type="submit" className="requestFormButton" block>
                                 Create Request
                                     </Button>
                         </Col>
@@ -121,6 +135,13 @@ const RequestForm = (props) => {
                 </Form>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
+                    </div>
+                </Jumbotron>
+        
+        </>
     )
 }
 
