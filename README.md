@@ -9,3 +9,4 @@ Top Features:
 * Element focus using HashLink
 * Store JWT
 * Connected with Node.js REST APIs
+* Animations
