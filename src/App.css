@@ -76,11 +76,6 @@ address{
 }
 
 .request_form{
-  animation-duration: 1s; /* the duration of the animation */
-  animation-timing-function: linear; /* how the animation will behave */
-  animation-delay: 0s; /* how long to delay the animation from starting */
-  animation-iteration-count: 1; /* how many times the animation will play */
-  animation-name: slideInFromRight; /* the name of the animation we defined above */
   border-top: 2vh solid rgb(2, 194, 194);
   padding: 2rem 2rem 2rem 2rem;
   background-color: white;
@@ -88,6 +83,31 @@ address{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 2vh;
 }
+
+/*.request_form_animation{  
+  animation-duration: 1s;*/ /* the duration of the animation */
+/*  animation-timing-function: linear; /* how the animation will behave */
+/*  animation-delay: 0s; /* how long to delay the animation from starting */
+/*  animation-iteration-count: 1; /* how many times the animation will play */
+/*  animation-name: slideInFromRight; /* the name of the animation we defined above */
+/*}*/
+
+/*.request-form-appear {
+   opacity: 0.5;
+  transform: translateX(15%); 
+}
+*/
+
+.request-form-appear.request-form-appear-active {
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1; 
+  animation-name: slideInFromRight;
+  /* opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1s, transform 1s; */
+}
+
 
 .requestFormButton{
   background-color: rgb(2, 194, 194);
