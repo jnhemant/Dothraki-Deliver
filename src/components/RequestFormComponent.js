@@ -9,7 +9,23 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => !(val) || (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 
+const useProgressiveImage = src => {  
+    const [sourceLoaded, setSourceLoaded] = useState(null)
+  
+    useEffect(() => {
+      const img = new Image()
+      img.src = src
+      img.onload = () => setSourceLoaded(src)
+    }, [src])
+  
+    return sourceLoaded 
+  }
+
 const RequestForm = (props) => {
+    const loaded = useProgressiveImage('./images/jumbo.jpg');
+
+
+
     const [formIsHalfFilledOut, setFormIsHalfFilledOut] = useState(false);
     const handleSubmit = async (values) => {
         setFormIsHalfFilledOut(false);
@@ -27,10 +43,21 @@ const RequestForm = (props) => {
             window.onbeforeunload = undefined
         }
     });
+    if(!loaded){
+        return(
+            <Jumbotron style={{ backgroundColor: '#242b2c', height: '100vh'}}>
+                <div className="container loading">
+                    <span className="fa fa-spinner fa-pulse fa-3x fa-fw"></span>
+                    <p>Loading . . .</p>
+                </div>
+                
+            </Jumbotron>
+        )
+    }
 
     return (
         <>
-            <Jumbotron>
+            <Jumbotron style={{ backgroundImage: `url(${loaded || './images/logo.svg'})`}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-sm-12">
@@ -51,7 +78,8 @@ const RequestForm = (props) => {
                             transitionEnter={false}
                             transitionLeave={false}
                             transitionEnterTimeout={1000}
-                            transitionLeaveTimeot={300}>
+                            transitionLeaveTimeot={300}
+                            >
                                         <div className="request_form">
                                             <h4>Create a request</h4>
                                             <Form id="create-request" model="request" onSubmit={(values) => handleSubmit(values)}>
