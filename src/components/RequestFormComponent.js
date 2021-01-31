@@ -45,19 +45,22 @@ const RequestForm = (props) => {
     });
     if(!loaded){
         return(
-            <Jumbotron style={{ backgroundColor: '#242b2c', height: '100vh'}}>
-                <div className="container loading">
-                    <span className="fa fa-spinner fa-pulse fa-3x fa-fw"></span>
-                    <p>Loading . . .</p>
-                </div>
-                
-            </Jumbotron>
+            //Loading animation (Option 1)
+            // <Jumbotron style={{ backgroundColor: '#242b2c', height: '100vh'}}>
+            //     <div className="container loading">
+            //         <span className="fa fa-spinner fa-pulse fa-3x fa-fw"></span>
+            //         <p>Loading . . .</p>
+            //     </div>                
+            // </Jumbotron>
+
+            //Blurred Pic (Option 2)
+            <Jumbotron style={{ backgroundImage: `url('./images/placeholder.jpg')`, height: '100vh'}}></Jumbotron>
         )
     }
 
     return (
         <>
-            <Jumbotron style={{ backgroundImage: `url(${loaded || './images/logo.svg'})`}}>
+            <Jumbotron style={{ backgroundImage: `url(${loaded})`}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-sm-12">
