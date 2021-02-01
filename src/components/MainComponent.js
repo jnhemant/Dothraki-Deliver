@@ -4,6 +4,7 @@ import Footer from './FooterComponent';
 import RequestForm from './RequestFormComponent';
 import Login from './LoginComponent';
 import Signup from './SignupComponent';
+import TryMe from './TryMeComponent';
 import PendingRequests from './PendingRequestsComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -147,6 +148,7 @@ class Main extends Component{
                     <Route path="/pendingrequests" component={Requests} />
                     <Route path="/login" component={LoginPage}/>
                     <Route path="/signup" component={SignupPage}/>
+                    <Route path="/try" component={TryMe}/>
                     {/* <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback}/>}/>
           <Route exact path="/aboutus" component={() => <About leaders={this.props.leaders}/>}/> */}
                     <Redirect to="/home" />

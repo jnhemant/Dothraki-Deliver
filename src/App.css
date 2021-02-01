@@ -64,6 +64,40 @@
   font-size: 6vh;
 }
 
+.try{
+  animation-duration: 1s; 
+  animation-timing-function: linear; 
+  animation-delay: 0s; 
+  animation-iteration-count: 1; 
+  animation-name: slideInFromBottom; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.try-static{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.jumbotext-static{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  font-size: 6vh;
+}
+
 address{
   font-size:80%;
   margin:0px;
@@ -137,14 +171,14 @@ address{
 }
 
 @media screen and (max-width: 1030px) {
-  .jumbotext{
+  .jumbotext, .jumbotext-static{
     padding: inherit;
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+    /* position: absolute; */
+    /* top: 50%;
+    transform: translate(0, -50%); */
     font-size: 3vh;
   }
 }

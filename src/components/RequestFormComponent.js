@@ -3,6 +3,7 @@ import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, 
 import { Link, NavLink, Redirect, Prompt } from 'react-router-dom';
 import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
 import { CSSTransitionGroup } from 'react-transition-group';
+import handleViewport from 'react-in-viewport';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -18,13 +19,12 @@ const useProgressiveImage = src => {
       img.onload = () => setSourceLoaded(src)
     }, [src])
   
-    return sourceLoaded 
+    return sourceLoaded;
   }
 
-const RequestForm = (props) => {
+const RequestFormBlock = (props) => {
     const loaded = useProgressiveImage('./images/jumbo.jpg');
-
-
+    const { inViewport, enterCount, forwardRef} = props;
 
     const [formIsHalfFilledOut, setFormIsHalfFilledOut] = useState(false);
     const handleSubmit = async (values) => {
@@ -37,12 +37,16 @@ const RequestForm = (props) => {
     }
 
     useEffect(() => {
+        // const status = ref.getBoundingClientRect();
+        // console.log(status);
         if (formIsHalfFilledOut) {
             window.onbeforeunload = () => true
         } else {
             window.onbeforeunload = undefined
         }
     });
+    console.log("inViewport is:" + inViewport + " & enterCount is: " + enterCount);
+    const jumboTextClass = (inViewport && enterCount === 1)?"jumbotext":"jumbotext-static";
     if(!loaded){
         return(
             //Loading animation (Option 1)
@@ -60,15 +64,17 @@ const RequestForm = (props) => {
 
     return (
         <>
+        <div style={{height: '100vh'}}>Hello brother</div>
             <Jumbotron style={{ backgroundImage: `url(${loaded})`}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-sm-12">
                             <div className="container">
-                                <div className="jumbotext">
+                                <div className={jumboTextClass} ref={forwardRef}>
                                     {/* <h1>Dothraki Delivery<span style={{color:"teal"}}>.</span></h1> */}
                                     <span>Wanna Send goods to your loved ones?</span>
-                                </div></div>
+                                </div>
+                            </div>
                         </div>
                         
                             <div className="col-md-4 col-sm-12">
@@ -81,7 +87,7 @@ const RequestForm = (props) => {
                             transitionEnter={false}
                             transitionLeave={false}
                             transitionEnterTimeout={1000}
-                            transitionLeaveTimeot={300}
+                            transitionLeaveTimeout={300}
                             >
                                         <div className="request_form">
                                             <h4>Create a request</h4>
@@ -187,5 +193,7 @@ const RequestForm = (props) => {
         </>
     )
 }
+
+const RequestForm = handleViewport(RequestFormBlock,);
 
 export default RequestForm;
