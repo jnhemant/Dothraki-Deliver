@@ -24,7 +24,7 @@ const useProgressiveImage = src => {
 
 const RequestFormBlock = (props) => {
     const loaded = useProgressiveImage('./images/jumbo.jpg');
-    const { inViewport, enterCount, forwardRef} = props;
+    const { inViewport, enterCount, forwardedRef} = props;
 
     const [formIsHalfFilledOut, setFormIsHalfFilledOut] = useState(false);
     const handleSubmit = async (values) => {
@@ -47,8 +47,20 @@ const RequestFormBlock = (props) => {
     });
     console.log("inViewport is:" + inViewport + " & enterCount is: " + enterCount);
     const jumboTextClass = (inViewport && enterCount === 1)?"jumbotext":"jumbotext-static";
-    if(!loaded){
-        return(
+    const requestFormClass = (inViewport && enterCount === 1)?"request-form":"request-form-static";
+    // return(
+    //     <>
+    //     <div style={{height: '100vh'}}></div>
+    //     <div ref={forwardedRef}>
+    //     <div className="container">
+    //         <div className={classNameVar} style={{ backgroundColor: "teal", height: '20vh' }}>
+    //             <span>Wanna Send goods to your loved ones?</span>
+    //         </div></div>
+    // </div>
+    // </>
+    // )
+    // if(!loaded){
+        // return(
             //Loading animation (Option 1)
             // <Jumbotron style={{ backgroundColor: '#242b2c', height: '100vh'}}>
             //     <div className="container loading">
@@ -58,37 +70,39 @@ const RequestFormBlock = (props) => {
             // </Jumbotron>
 
             //Blurred Pic (Option 2)
-            <Jumbotron style={{ backgroundImage: `url('./images/placeholder.jpg')`, height: '100vh'}}></Jumbotron>
-        )
-    }
+    //         <>
+    //         <div style={{height: "100vh"}}> Hello! </div>
+    //         <Jumbotron style={{ backgroundImage: `url('./images/placeholder.jpg')`, height: '100vh'}}></Jumbotron>
+    //         </>
+    //     )
+    // }
+
+    
+    
 
     return (
         <>
-        <div style={{height: '100vh'}}>Hello brother</div>
+        <div style={{height: '100vh'}}>
+            Hello
+        </div>
             <Jumbotron style={{ backgroundImage: `url(${loaded})`}}>
+            <div ref={forwardedRef}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-8 col-sm-12">
-                            <div className="container">
-                                <div className={jumboTextClass} ref={forwardRef}>
+                        <div className="col-md-8 col-sm-12">                            
+                            <div className="container">                            
+                                <div className={jumboTextClass}>
                                     {/* <h1>Dothraki Delivery<span style={{color:"teal"}}>.</span></h1> */}
                                     <span>Wanna Send goods to your loved ones?</span>
                                 </div>
                             </div>
+                            
                         </div>
                         
                             <div className="col-md-4 col-sm-12">
                                 <div className="container">
                                     <div className="row">
-                                    <CSSTransitionGroup
-                            transitionName="request-form"
-                            transitionAppear={true}
-                            transitionAppearTimeout={1000}
-                            transitionEnter={false}
-                            transitionLeave={false}
-                            transitionEnterTimeout={1000}
-                            transitionLeaveTimeout={300}
-                            >
+                                    <div className={requestFormClass}>
                                         <div className="request_form">
                                             <h4>Create a request</h4>
                                             <Form id="create-request" model="request" onSubmit={(values) => handleSubmit(values)}>
@@ -181,12 +195,13 @@ const RequestFormBlock = (props) => {
                                                 </Row>
                                             </Form>
                                         </div>
-                                        </CSSTransitionGroup>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         
                     </div>
+                </div>
                 </div>
             </Jumbotron>
 
@@ -194,6 +209,12 @@ const RequestFormBlock = (props) => {
     )
 }
 
-const RequestForm = handleViewport(RequestFormBlock,);
+const ViewportBlock = handleViewport(RequestFormBlock,);
+
+const RequestForm = (props) => (
+    <div>
+        <ViewportBlock onEnterViewport={() => console.log('enter')} onLeaveViewport={() => console.log('leave')} />
+    </div>
+)
 
 export default RequestForm;

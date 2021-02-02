@@ -11,7 +11,7 @@
 
 @keyframes slideInFromBottom {
   0% { 
-    transform: translateY(-35%);
+    transform: translateY(-25%);
     opacity: 0.5;
   }
   100% { 
@@ -141,16 +141,19 @@ address{
 }
 */
 
-.request-form-appear.request-form-appear-active {
+.request-form{
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: 1; 
   animation-name: slideInFromRight;
-  /* opacity: 1;
+  opacity: 1;
   transform: translateX(0);
-  transition: opacity 1s, transform 1s; */
+  transition: opacity 1s, transform 1s;
 }
 
+.request-form-static{
+  opacity: 1;
+}
 
 .requestFormButton{
   background-color: rgb(2, 194, 194);

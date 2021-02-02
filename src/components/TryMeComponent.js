@@ -2,20 +2,11 @@ import handleViewport from 'react-in-viewport';
 
 const Block = (props) => {
     const { inViewport, forwardedRef, enterCount } = props;
-    if (inViewport && enterCount === 1) {
-        return (
-            <div className="viewport-block" ref={forwardedRef}>
-                <div className="container">
-                    <div className="try" style={{ backgroundColor: "teal", height: '20vh' }}>
-                        <span>Wanna Send goods to your loved ones?</span>
-                    </div></div>
-            </div>
-        )
-    }
+    const classNameVar = inViewport && enterCount === 1?"try":"try-static";
     return (
-        <div className="viewport-block" ref={forwardedRef}>
+        <div ref={forwardedRef}>
             <div className="container">
-                <div className="try-static" style={{ backgroundColor: "teal", height: '20vh' }}>
+                <div className={classNameVar} style={{ backgroundColor: "teal", height: '20vh' }}>
                     <span>Wanna Send goods to your loved ones?</span>
                 </div></div>
         </div>
