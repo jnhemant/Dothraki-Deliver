@@ -72,10 +72,8 @@ class Main extends Component{
         const HomePage = () => {
             return(
             <RequestForm isLoggedIn={this.props.isLoggedIn}
-            postRequestForm={this.props.postRequestForm} 
-            resetRequestForm={this.props.resetRequestForm}             
+            postRequestForm={this.props.postRequestForm}            
             history={this.props.history}
-            resetRoute={this.props.resetRoute}
             />
             )
         }
