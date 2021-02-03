@@ -50,8 +50,10 @@ const Login = (props) => {
 
 
     return (
+        <div style={{backgroundColor: '#242b2c', color: 'white'}}>
         <div className="container row row-content">
             <div className="col-12 col-md-7 offset-md-2 pending_request">
+                <div className="loginForm">
                 <AuthAlert currentRoute={props.targetRoute.targetRoute} protectedRoute={props.protectedRoute} />
                 <Form id="login-form" model="login" onSubmit={(values) => handleLogin(values)}>
                     <Row className="form-group">
@@ -104,7 +106,9 @@ const Login = (props) => {
                         </Col>
                     </Row>
                 </Form>
+                </div>
             </div>
+        </div>
         </div>
     )
 }
