@@ -24,19 +24,9 @@ const useProgressiveImage = src => {
 const RequestForm = (props) => {
     const loaded = useProgressiveImage('./images/jumbo.jpg');
 
-    // return(
-    //     <>
-    //     <div style={{height: '100vh'}}></div>
-    //     <div ref={forwardedRef}>
-    //     <div className="container">
-    //         <div className={classNameVar} style={{ backgroundColor: "teal", height: '20vh' }}>
-    //             <span>Wanna Send goods to your loved ones?</span>
-    //         </div></div>
-    // </div>
-    // </>
-    // )
-    // if(!loaded){
-    // return(
+    //Display only blurred background till the image loads
+    if(!loaded){
+    return(
     //Loading animation (Option 1)
     // <Jumbotron style={{ backgroundColor: '#242b2c', height: '100vh'}}>
     //     <div className="container loading">
@@ -46,19 +36,15 @@ const RequestForm = (props) => {
     // </Jumbotron>
 
     //Blurred Pic (Option 2)
-    //         <>
-    //         <div style={{height: "100vh"}}> Hello! </div>
-    //         <Jumbotron style={{ backgroundImage: `url('./images/placeholder.jpg')`, height: '100vh'}}></Jumbotron>
-    //         </>
-    //     )
-    // }
+            <>
+            <Jumbotron style={{ backgroundImage: `url('./images/placeholder.jpg')`, height: '100vh'}}></Jumbotron>
+            </>
+        )
+    }
 
-
+    //Display all components after the background image loads
     return (
         <>
-            <div style={{ height: '100vh' }}>
-                Hello
-        </div>
             <Jumbotron style={{ backgroundImage: `url(${loaded})` }}>
                 <div className="container">
                     <div className="row">
