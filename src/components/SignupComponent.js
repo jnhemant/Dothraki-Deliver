@@ -29,7 +29,7 @@ const Signup = (props) => {
         props.resetSignUpForm();
     }
     return (
-        <div style={{ backgroundColor: '#242b2c', color: 'white' }}>
+        <div style={{ backgroundColor: '#242b2c'}}>
             <div className="container row row-content">
                 <div className="col-12 col-md-7 offset-md-2 pending_request">
                     <div className="loginForm">
@@ -115,8 +115,8 @@ const Signup = (props) => {
                                     </Control.select></Col>
                             </Row>
                             <Row className="form-group">
-                                <Col md={{ size: 8, offset: 4 }}>
-                                    <Button type="submit" color="primary">
+                                <Col md={{ size: 8, offset: 5 }}>
+                                    <Button type="submit">
                                         Sign Up
                     </Button>
                                 </Col>
