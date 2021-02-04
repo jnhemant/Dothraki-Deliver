@@ -70,7 +70,7 @@ const PendingRequests = (props) => {
                     <h4>Pending Requests</h4>
                 </Col>
             </Row>
-        <Table responsive borderless hover striped className='text-center' size='md' id="pending-requests">
+        <Table responsive borderless hover striped className='text-center' size='sm' id="pending-requests">
             <thead>
                 <tr>
                     <th>#</th>
