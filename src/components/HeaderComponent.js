@@ -125,13 +125,16 @@ class Header extends Component {
             // console.log(this.props.isLoggedIn.isLoggedIn);
             button = <Nav className="ml-auto" navbar>
                 <NavItem>
-                    <NavHashLink className="nav-link" smooth to="/login#login-form"  style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                    {/* Use smooth tp="/login#login-form" in orser to scroll to the form, removed this feature as it was causing 
+                    issues while displaying animation in homepage after form submission */}
+                    <NavHashLink className="nav-link" smooth to="/login"  style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
                         activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
                         <span className="fa fa-sign-in fa-lg"></span>{' '}Login
                     </NavHashLink>
                 </NavItem>
                 <NavItem>
-                    <NavHashLink className="nav-link" smooth to="/signup#signup-form" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
+                    {/* Use smooth tp="/signup#signup-form" in orser to scroll to the form, removed for the same reason as mentioned above */}
+                    <NavHashLink className="nav-link" smooth to="/signup" style={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}
                         activeStyle={{ color: 'rgb(3, 233, 233)', textDecoration: 'none' }}>
                         <span className="fa fa-user-plus fa-lg"></span>{' '}Sign Up
                     </NavHashLink>

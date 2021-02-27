@@ -28,7 +28,7 @@ const Login = (props) => {
         // this.toggleModal();
 
         // event.preventDefault();
-        await props.postLogin(values.email, values.password, "/home");
+        await props.postLogin(values.email, values.password);
         // alert("email: " + values.email
         //     + " Password: " + values.password +
         //     " Remember: " + values.remember);
