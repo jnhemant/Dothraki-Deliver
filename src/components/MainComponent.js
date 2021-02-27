@@ -51,12 +51,14 @@ const mapDispatchToProps = dispatch => ({
     postRating: (requestId, rating, feedback, history) => dispatch(postRating(requestId, rating, feedback, history)),
     addTargetRoute: (route) => dispatch(addTargetRoute(route)),
     resetTargetRoute: () => dispatch(resetTargetRoute())
-  });
+});
+
+
 
 class Main extends Component{
-    constructor(props){
-        super(props);
-    }
+    // constructor(props){
+    //     super(props);
+    // }
 
     componentDidMount() {
         this.props.fetchRequests();
@@ -122,7 +124,6 @@ class Main extends Component{
                 resetSignUpForm={this.props.resetSignUpForm}
                 postSignUp={this.props.postSignUp}
                 protectedRoute={this.props.protectedRoute}
-                resetRoute={this.props.resetRoute}
                 resetRoute={this.props.resetRoute}
             />
             );            

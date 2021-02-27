@@ -40,7 +40,7 @@ export const postLogin = (email, password) => (dispatch) => {
             })
         .then(response => response.json())
         .then(response => {
-            alert(JSON.stringify(response));
+            console.log(JSON.stringify(response));
             localStorage.setItem('token', response.token);
             dispatch(loginTrue());
             dispatch(resetRoute());
@@ -133,7 +133,7 @@ export const signOut = () => (dispatch) => {
             })
         .then(response => response.json())
         .then(response => {
-            alert(response.message)
+            console.log(response.message)
         })
         .catch(err => console.log(err.message));
 }

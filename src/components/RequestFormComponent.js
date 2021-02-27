@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
-import { Link, NavLink, Redirect, Prompt } from 'react-router-dom';
-import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
+import { Jumbotron, Button, Label, Row,  Col } from 'reactstrap';
+import { Prompt } from 'react-router-dom';
+import { Control, Errors, Form } from 'react-redux-form';
 import handleViewport from 'react-in-viewport';
 
 const required = (val) => val && val.length;
@@ -28,17 +28,17 @@ const RequestForm = (props) => {
     if(!loaded){
     return(
     //Loading animation (Option 1)
-    // <Jumbotron style={{ backgroundColor: '#242b2c', height: '100vh'}}>
-    //     <div className="container loading">
-    //         <span className="fa fa-spinner fa-pulse fa-3x fa-fw"></span>
-    //         <p>Loading . . .</p>
-    //     </div>                
-    // </Jumbotron>
+    <Jumbotron style={{ backgroundColor: '#242b2c', height: '100vh'}}>
+        <div className="container loading">
+            <span className="fa fa-spinner fa-pulse fa-3x fa-fw"></span>
+            <p>Loading . . .</p>
+        </div>                
+    </Jumbotron>
 
     //Blurred Pic (Option 2)
-            <>
-            <Jumbotron style={{ backgroundImage: `url('./images/placeholder.jpg')`, height: '100vh'}}></Jumbotron>
-            </>
+            // <>
+            // <Jumbotron style={{ backgroundImage: `url('./images/placeholder.jpg')`, height: '100vh'}}></Jumbotron>
+            // </>
         )
     }
 

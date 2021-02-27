@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Nav, Jumbotron, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Form, FormGroup, Button, Modal, ModalHeader, ModalBody, Label, Row, Input, Col } from 'reactstrap';
-import { NavLink, Link } from 'react-router-dom';
+import { Nav, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Form, FormGroup, Button, Modal, ModalHeader, ModalBody, Label, Input, Col } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 // import { Control, LocalForm, Errors, Form, actions } from 'react-redux-form';
 import ReactStars from "react-rating-stars-component";
 import { NavHashLink } from "react-router-hash-link";

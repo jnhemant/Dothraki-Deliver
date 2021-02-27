@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Label, Row, Col } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { Control, Errors, Form } from 'react-redux-form';
@@ -10,11 +10,11 @@ const required = (val) => val && val.length;
 
 const AuthAlert = (props) => {
     // console.log(props.protectedRoute.protectedRoute);
-    if (props.currentRoute === "/login" && !props.protectedRoute.protectedRoute) {
+    if ((props.currentRoute === "/login" || props.currentRoute === "/home") && !props.protectedRoute.protectedRoute) {
         return (<div></div>);
     }
 
-    // console.log(props.history);
+    console.log("current route is: " + props.currentRoute);
     return (
         <div>
             <span style={{ color: "red" }}><p>*You must log in first</p></span>

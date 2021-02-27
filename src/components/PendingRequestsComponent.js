@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Row, Col, Button} from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { HashLink } from 'react-router-hash-link';
 
