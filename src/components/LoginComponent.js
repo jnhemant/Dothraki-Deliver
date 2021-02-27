@@ -35,15 +35,21 @@ const Login = (props) => {
         if (!values.remember) {
             props.resetLoginForm();
         }
+        // props.history.push("/home");
     }
 
 
     if (props.isLoggedIn.isLoggedIn) {
         var currentRoute = props.targetRoute.targetRoute;
         console.log("targetRoute is :" + currentRoute);
-        props.resetTargetRoute();
-        props.fetchRequests();
-        return (<Redirect to={currentRoute} />)
+        if(currentRoute !== "/home" && currentRoute !== "/login"){
+            props.resetTargetRoute();
+            props.fetchRequests();
+            return (<Redirect to={currentRoute} />)
+        }
+        else{
+            return (<Redirect to="/home"/>)
+        }        
     }
 
 

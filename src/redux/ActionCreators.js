@@ -43,7 +43,7 @@ export const postLogin = (email, password) => (dispatch) => {
             console.log(JSON.stringify(response));
             localStorage.setItem('token', response.token);
             dispatch(loginTrue());
-            dispatch(resetRoute());
+            // dispatch(resetRoute());
         })
         .catch(err => {
             console.log('Log In not successful ', err.message);
