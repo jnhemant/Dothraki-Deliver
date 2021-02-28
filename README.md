@@ -1,3 +1,18 @@
+# Dothraki-Delivery
+React App for a delivery service
+
+Top Features:
+* Reactstrap
+* Redux
+* Authentication
+* Redirect for protected routes
+* Element focus using HashLink
+* JWTs stored in localstorage
+* Connected with Node.js REST APIs
+* Animations
+
+*********************************************************************************************************************************************************************************
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
